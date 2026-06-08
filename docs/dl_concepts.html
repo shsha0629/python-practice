@@ -25,7 +25,7 @@
       --blue-bg: #dbeafe;
       --blue-text: #1d4ed8;
     }
-
+ 
     @media (prefers-color-scheme: dark) {
       :root {
         --bg: #1a1a1a;
@@ -44,9 +44,9 @@
         --blue-text: #85b7eb;
       }
     }
-
+ 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
+ 
     body {
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
       background: var(--bg);
@@ -55,56 +55,56 @@
       max-width: 700px;
       margin: 0 auto;
     }
-
+ 
     .graph-section { display: none; }
     .graph-section.active { display: block; }
-
+ 
     h2 { font-size: 17px; font-weight: 500; margin-bottom: 4px; }
-
+ 
     .subtitle { font-size: 13px; color: var(--text2); margin-bottom: 16px; }
-
+ 
     .canvas-wrap { position: relative; width: 100%; height: 280px; }
-
+ 
     .tab-row, .step-row {
       display: flex; gap: 8px; margin-bottom: 16px; flex-wrap: wrap;
     }
-
+ 
     .tab-btn {
       padding: 6px 14px; font-size: 13px; border-radius: 99px;
       border: 1px solid var(--border); background: var(--bg);
       color: var(--text2); cursor: pointer; transition: all .15s;
     }
     .tab-btn.active { background: var(--purple); border-color: var(--purple); color: #fff; }
-
+ 
     .stat-row { display: flex; gap: 10px; margin-top: 12px; flex-wrap: wrap; }
-
+ 
     .stat-card {
       background: var(--bg2); border-radius: 8px; padding: 10px 14px;
       flex: 1; min-width: 120px;
     }
     .stat-label { font-size: 11px; color: var(--text2); margin-bottom: 3px; }
     .stat-val { font-size: 17px; font-weight: 500; }
-
+ 
     .explain-box {
       margin-top: 12px; padding: 12px 16px;
       border-left: 2px solid var(--purple);
       background: var(--bg2); font-size: 13px;
       color: var(--text2); line-height: 1.7;
     }
-
+ 
     .formula {
       font-family: monospace; font-size: 13px;
       background: var(--bg2); border-radius: 6px;
       padding: 10px 14px; margin-top: 10px; line-height: 1.9;
     }
-
+ 
     .sl-row {
       display: flex; align-items: center; gap: 10px; margin: 10px 0 6px;
     }
     .sl-row label { font-size: 13px; color: var(--text2); white-space: nowrap; }
     .sl-row input { flex: 1; accent-color: var(--purple); }
     .sl-val { font-size: 13px; font-weight: 500; min-width: 52px; text-align: right; }
-
+ 
     .badge {
       display: inline-block; font-size: 11px;
       padding: 3px 9px; border-radius: 99px; font-weight: 500;
@@ -112,25 +112,25 @@
     .badge-red { background: var(--red-bg); color: var(--red-text); }
     .badge-green { background: var(--green-bg); color: var(--green-text); }
     .badge-blue { background: var(--blue-bg); color: var(--blue-text); }
-
+ 
     .z-tag {
       display: inline-block; font-size: 12px; padding: 2px 8px;
       border-radius: 4px; font-weight: 500;
       background: var(--purple-bg); color: var(--purple-text);
     }
-
+ 
     .hl-p { color: var(--purple); font-weight: 500; }
     .hl-c { color: var(--coral); font-weight: 500; }
     .hl-t { color: var(--teal); font-weight: 500; }
-
+ 
     .hint { font-size: 11px; color: var(--text2); margin-top: 8px; opacity: .7; }
-
+ 
     .slider-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 10px; }
-
+ 
     .legend { display: flex; gap: 16px; margin-bottom: 10px; flex-wrap: wrap; }
     .legend-item { display: flex; align-items: center; gap: 6px; font-size: 12px; color: var(--text2); }
     .legend-dot { width: 10px; height: 10px; border-radius: 2px; }
-
+ 
     /* index menu */
     .menu-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 20px; }
     .menu-card {
@@ -142,7 +142,7 @@
     .menu-card-title { font-size: 15px; font-weight: 500; margin-bottom: 6px; }
     .menu-card-desc { font-size: 12px; color: var(--text2); line-height: 1.5; }
     .menu-card-url { font-size: 11px; color: var(--purple); margin-top: 8px; font-family: monospace; }
-
+ 
     .table-wrap { margin-top: 12px; overflow-x: auto; }
     table { width: 100%; border-collapse: collapse; font-size: 13px; }
     th {
@@ -154,7 +154,7 @@
     tr.total-row td { font-weight: 600; background: var(--bg2); }
     .td-err { color: var(--coral); }
     .td-sq  { color: var(--purple); }
-
+ 
     .compare-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 10px; }
     .compare-card { border-radius: 8px; padding: 12px 14px; }
     .compare-card.a { background: rgba(29,158,117,0.08); border: 1px solid rgba(29,158,117,0.25); }
@@ -164,7 +164,7 @@
     .compare-card.b .compare-title { color: var(--purple); }
     .compare-val { font-size: 20px; font-weight: 500; }
     .compare-desc { font-size: 11px; color: var(--text2); margin-top: 2px; }
-
+ 
     /* pixel grid for flatten */
     .pixel-row { display: flex; gap: 2px; margin-bottom: 2px; }
     .pixel-cell {
@@ -181,10 +181,45 @@
       font-size: 10px; font-family: monospace; font-weight: 500;
       border: 1px solid var(--border);
     }
+ 
+    /* filter/edge styles */
+    .filter-btn-row { display: flex; gap: 8px; margin-bottom: 16px; flex-wrap: wrap; }
+    .filter-sel-btn {
+      padding: 6px 14px; font-size: 13px; border-radius: 99px;
+      border: 1px solid var(--border); background: var(--bg);
+      color: var(--text2); cursor: pointer; transition: all .15s;
+    }
+    .filter-sel-btn.active { background: var(--purple); border-color: var(--purple); color: #fff; }
+    .fv-row {
+      display: flex; align-items: flex-start; gap: 14px;
+      flex-wrap: wrap; margin-bottom: 14px;
+    }
+    .fv-col { display: flex; flex-direction: column; align-items: center; gap: 6px; flex-shrink: 0; }
+    .fv-label { font-size: 11px; color: var(--text2); font-family: monospace; }
+    .fv-op { font-size: 20px; color: var(--border); align-self: center; padding-top: 22px; }
+    .kernel-grid {
+      display: grid; grid-template-columns: repeat(3, 40px); gap: 3px;
+    }
+    .k-cell {
+      width: 40px; height: 40px; display: flex; align-items: center;
+      justify-content: center; font-family: monospace; font-size: 13px;
+      font-weight: 500; border-radius: 5px; border: 1px solid var(--border);
+    }
+    .k-pos { background: var(--green-bg); color: var(--green-text); }
+    .k-neg { background: var(--red-bg);   color: var(--red-text); }
+    .k-zero { background: var(--bg2); color: var(--text2); }
+    .fv-canvas { display: block; image-rendering: pixelated; border-radius: 5px; border: 1px solid var(--border); }
+    .calc-box {
+      margin-top: 4px; font-family: monospace; font-size: 12px;
+      color: var(--text2); line-height: 2;
+    }
+    .calc-pos { color: var(--teal); font-weight: 500; }
+    .calc-neg { color: var(--coral); font-weight: 500; }
+    .calc-result { font-size: 15px; color: var(--purple); font-weight: 600; }
   </style>
 </head>
 <body>
-
+ 
   <!-- INDEX -->
   <div id="page-index" class="graph-section">
     <h2>DL 개념 그래프 모음</h2>
@@ -220,9 +255,14 @@
         <div class="menu-card-desc">필터 슬라이딩, stride·padding이 출력 크기에 미치는 영향</div>
         <div class="menu-card-url">#convolution</div>
       </a>
+      <a class="menu-card" href="#filter">
+        <div class="menu-card-title">Filter와 Edge 검출</div>
+        <div class="menu-card-desc">Sobel · Laplacian · Blur 필터 비교, 계산 과정 시각화</div>
+        <div class="menu-card-url">#filter</div>
+      </a>
     </div>
   </div>
-
+ 
   <!-- ACTIVATION -->
   <div id="page-activation" class="graph-section">
     <h2>활성화 함수</h2>
@@ -240,7 +280,7 @@
     <div id="act-formula"></div>
     <div class="explain-box" id="act-explain"></div>
   </div>
-
+ 
   <!-- LOSS -->
   <div id="page-loss" class="graph-section">
     <h2>손실 함수와 학습</h2>
@@ -260,7 +300,7 @@
     <div id="loss-formula"></div>
     <div class="explain-box" id="loss-explain"></div>
   </div>
-
+ 
   <!-- GRADIENT -->
   <div id="page-gradient" class="graph-section">
     <h2>경사 하강법</h2>
@@ -285,7 +325,7 @@
     <div id="grad-formula"></div>
     <div class="explain-box" id="grad-explain"></div>
   </div>
-
+ 
   <!-- FLATTEN -->
   <div id="page-flatten" class="graph-section">
     <h2>Flatten과 공간 정보 손실</h2>
@@ -296,7 +336,7 @@
     <div id="flat-formula"></div>
     <div class="explain-box" id="flat-explain"></div>
   </div>
-
+ 
   <!-- OVERFIT -->
   <div id="page-overfit" class="graph-section">
     <h2>과적합 vs 과소적합</h2>
@@ -316,7 +356,7 @@
     <div id="overfit-formula"></div>
     <div class="explain-box" id="overfit-explain"></div>
   </div>
-
+ 
   <!-- CONVOLUTION -->
   <div id="page-convolution" class="graph-section">
     <h2>Convolution 연산</h2>
@@ -343,24 +383,34 @@
     <div id="conv-formula"></div>
     <div class="explain-box" id="conv-explain"></div>
   </div>
-
+ 
+  <!-- FILTER & EDGE -->
+  <div id="page-filter" class="graph-section">
+    <h2>Filter와 Edge 검출</h2>
+    <p class="subtitle">필터를 선택하고 각 단계별로 Convolution 연산 과정을 확인하세요</p>
+    <div class="tab-row" id="filter-tabs"></div>
+    <div id="filter-main-visual"></div>
+    <div id="filter-formula"></div>
+    <div class="explain-box" id="filter-explain"></div>
+  </div>
+ 
   <script>
     window.addEventListener('DOMContentLoaded', () => {
-
+ 
       const param = location.hash.replace('#', '') || 'index';
       const pageId = 'page-' + param;
       const el = document.getElementById(pageId) || document.getElementById('page-index');
       el.classList.add('active');
-
+ 
       window.addEventListener('hashchange', () => location.reload());
-
+ 
       const isDark = matchMedia('(prefers-color-scheme: dark)').matches;
       const textColor = isDark ? '#aaa' : '#666';
       const gridColor = isDark ? 'rgba(255,255,255,0.07)' : 'rgba(0,0,0,0.06)';
-
+ 
       const PURPLE = '#534AB7', TEAL = '#1D9E75', CORAL = '#D85A30';
       const LIGHT_PURPLE = isDark ? 'rgba(83,74,183,0.25)' : 'rgba(83,74,183,0.12)';
-
+ 
       function mkChart(id, xMin, xMax, yMin, yMax, xLabel, yLabel) {
         const canvas = document.getElementById(id);
         if (!canvas) return null;
@@ -387,7 +437,7 @@
           }
         });
       }
-
+ 
       function lineDS(pts, color, dash, width) {
         return {
           type: 'line', data: pts, showLine: true, pointRadius: 0,
@@ -404,7 +454,7 @@
           borderColor: 'transparent', backgroundColor: color, fill: true, tension: 0.4
         };
       }
-
+ 
       function renderStats(id, arr) {
         const el = document.getElementById(id);
         if (!el) return;
@@ -412,22 +462,22 @@
           `<div class="stat-card"><div class="stat-label">${s.label}</div><div class="stat-val">${s.val}</div></div>`
         ).join('');
       }
-
+ 
       // ===================== ACTIVATION =====================
       if (param === 'activation') {
         const chart = mkChart('act-chart', -5, 5, -1.5, 1.5, 'x (입력)', 'f(x) (출력)');
         let actTab = 0;
-
+ 
         function sigmoid(x) { return 1 / (1 + Math.exp(-x)); }
         function relu(x) { return Math.max(0, x); }
         function tanh_(x) { return Math.tanh(x); }
-
+ 
         function range(a, b, step) {
           const pts = [];
           for (let x = a; x <= b; x += step) pts.push({ x: parseFloat(x.toFixed(3)), y: 0 });
           return pts;
         }
-
+ 
         const ACTTABS = [
           {
             label: 'Sigmoid',
@@ -469,37 +519,37 @@
             explain: 'Tanh는 Sigmoid를 −1~1로 확장한 함수입니다. 출력의 평균이 0에 가까워 학습이 더 안정적이어서 RNN(순환 신경망) 계열에서 자주 사용됩니다. Sigmoid처럼 포화 영역에서 기울기 소실 문제가 발생합니다.'
           }
         ];
-
+ 
         function setActTab(i) {
           actTab = i;
           document.getElementById('act-tabs').querySelectorAll('.tab-btn').forEach((b, j) => b.classList.toggle('active', j === i));
           renderAct();
         }
-
+ 
         function renderAct() {
           const t = ACTTABS[actTab];
           const xVal = parseFloat(document.getElementById('act-x').value);
           const yVal = t.fn(xVal);
           if (!chart) return;
-
+ 
           chart.options.scales.y.min = t.yMin;
           chart.options.scales.y.max = t.yMax;
-
+ 
           const pts = [];
           for (let x = -5; x <= 5; x += 0.05) pts.push({ x: parseFloat(x.toFixed(2)), y: t.fn(x) });
-
+ 
           chart.data.datasets = [
             lineDS(pts, t.color, [], 2.5),
             lineDS([{ x: -5, y: 0 }, { x: 5, y: 0 }], isDark ? 'rgba(255,255,255,0.15)' : 'rgba(0,0,0,0.15)', [], 1),
             dotDS([{ x: xVal, y: yVal }], t.color, 8)
           ];
           chart.update();
-
+ 
           renderStats('act-stats', t.stats(xVal, yVal));
           document.getElementById('act-formula').innerHTML = `<div class="formula">${t.formula(xVal, yVal)}</div>`;
           document.getElementById('act-explain').textContent = t.explain;
         }
-
+ 
         const actTabRow = document.getElementById('act-tabs');
         ACTTABS.forEach((t, i) => {
           const b = document.createElement('button');
@@ -508,21 +558,21 @@
           b.onclick = () => setActTab(i);
           actTabRow.appendChild(b);
         });
-
+ 
         document.getElementById('act-x').addEventListener('input', function () {
           document.getElementById('act-x-label').textContent = 'x = ' + parseFloat(this.value).toFixed(1);
           renderAct();
         });
         setActTab(0);
       }
-
+ 
       // ===================== LOSS =====================
       if (param === 'loss') {
         const chart = mkChart('loss-chart', 0, 1, 0, 5.5, '예측값 p̂', '손실값');
         let lossTab = 0;
-
+ 
         function crossEntropy(p) { return -Math.log(Math.max(p, 1e-9)); }
-
+ 
         const LOSSTABS = [
           {
             label: '1단계 — Cross-Entropy란',
@@ -634,7 +684,7 @@
             explain: '슬라이더로 예측 확률 p̂을 조절해보세요. 정답이 1(y=1)일 때 p̂이 높을수록 Loss가 0에 가까워집니다. p̂이 0.1처럼 낮으면 Loss가 2.3 이상으로 커지는 것을 확인할 수 있습니다.'
           }
         ];
-
+ 
         const lossTabRow = document.getElementById('loss-tabs');
         LOSSTABS.forEach((t, i) => {
           const b = document.createElement('button');
@@ -643,7 +693,7 @@
           b.onclick = () => setLossTab(i);
           lossTabRow.appendChild(b);
         });
-
+ 
         function setLossTab(i) {
           lossTab = i;
           lossTabRow.querySelectorAll('.tab-btn').forEach((b, j) => b.classList.toggle('active', j === i));
@@ -652,22 +702,22 @@
           t.render();
           document.getElementById('loss-explain').textContent = t.explain;
         }
-
+ 
         document.getElementById('loss-p').addEventListener('input', function () {
           document.getElementById('loss-p-label').textContent = parseFloat(this.value).toFixed(2);
           if (lossTab === 3) LOSSTABS[3].render();
         });
         setLossTab(0);
       }
-
+ 
       // ===================== GRADIENT =====================
       if (param === 'gradient') {
         const chart = mkChart('grad-chart', -5, 5, -0.5, 25, 'w (가중치)', 'J(w) (손실)');
         let gradTab = 0;
-
+ 
         function J(w) { return w * w; }
         function dJ(w) { return 2 * w; }
-
+ 
         function gradientDescent(w0, lr, steps) {
           const path = [{ x: w0, y: J(w0) }];
           let w = w0;
@@ -678,10 +728,10 @@
           }
           return path;
         }
-
+ 
         const curvePts = [];
         for (let w = -5; w <= 5; w += 0.05) curvePts.push({ x: parseFloat(w.toFixed(2)), y: J(w) });
-
+ 
         const GRADTABS = [
           {
             label: '1단계 — 손실 함수',
@@ -780,7 +830,7 @@
             explain: '슬라이더로 학습률과 시작 위치를 바꿔보세요. lr이 너무 작으면 수렴이 느리고, 너무 크면 발산합니다. 실제 딥러닝에서는 lr을 자동으로 조절하는 Adam 같은 옵티마이저를 사용합니다.'
           }
         ];
-
+ 
         const gradTabRow = document.getElementById('grad-tabs');
         GRADTABS.forEach((t, i) => {
           const b = document.createElement('button');
@@ -789,7 +839,7 @@
           b.onclick = () => setGradTab(i);
           gradTabRow.appendChild(b);
         });
-
+ 
         function setGradTab(i) {
           gradTab = i;
           gradTabRow.querySelectorAll('.tab-btn').forEach((b, j) => b.classList.toggle('active', j === i));
@@ -798,7 +848,7 @@
           t.render();
           if (!t.slider) document.getElementById('grad-explain').textContent = t.explain;
         }
-
+ 
         ['grad-lr', 'grad-w0'].forEach(id => {
           const el = document.getElementById(id);
           if (el) {
@@ -810,25 +860,25 @@
         });
         setGradTab(0);
       }
-
+ 
       // ===================== FLATTEN =====================
       if (param === 'flatten') {
         let flatTab = 0;
-
+ 
         const IMG = [
           [220, 220, 10, 10],
           [220, 220, 10, 10],
           [10,  10, 200, 200],
           [10,  10, 200, 200]
         ];
-
+ 
         function grayHex(v) {
           const c = Math.round(Math.max(0, Math.min(255, v)));
           const h = c.toString(16).padStart(2, '0');
           return '#' + h + h + h;
         }
         function textColor_(v) { return v > 140 ? '#333' : '#ddd'; }
-
+ 
         function render2D(highlight) {
           let html = '<div style="margin:12px 0 8px"><div style="font-size:12px;color:var(--text2);margin-bottom:6px;">4×4 이미지 — 각 픽셀이 (행, 열) 위치를 가짐</div>';
           for (let r = 0; r < 4; r++) {
@@ -843,7 +893,7 @@
           html += '</div>';
           return html;
         }
-
+ 
         function renderFlat(highlightIdx) {
           const flat = IMG.flat();
           let html = '<div style="font-size:12px;color:var(--text2);margin-bottom:6px;margin-top:12px;">Flatten → 1D 벡터 (16개)</div><div class="flat-row">';
@@ -854,7 +904,7 @@
           html += '</div>';
           return html;
         }
-
+ 
         const FLATTABS = [
           {
             label: '1단계 — 원본 2D',
@@ -927,7 +977,7 @@
             explain: 'CNN은 Flatten 없이 2D 구조를 유지한 채 3×3 필터로 이미지를 훑습니다. 필터는 항상 공간적으로 인접한 픽셀들만 봄으로써 "왼쪽에 무엇이 있고, 위에 무엇이 있다"는 위치 관계를 유지합니다. 이것이 CNN이 이미지 인식에 강한 핵심 이유입니다.'
           }
         ];
-
+ 
         const flatTabRow = document.getElementById('flat-tabs');
         FLATTABS.forEach((t, i) => {
           const b = document.createElement('button');
@@ -936,7 +986,7 @@
           b.onclick = () => setFlatTab(i);
           flatTabRow.appendChild(b);
         });
-
+ 
         function setFlatTab(i) {
           flatTab = i;
           flatTabRow.querySelectorAll('.tab-btn').forEach((b, j) => b.classList.toggle('active', j === i));
@@ -945,12 +995,12 @@
         }
         setFlatTab(0);
       }
-
+ 
       // ===================== OVERFIT =====================
       if (param === 'overfit') {
         const chart = mkChart('overfit-chart', 0, 50, 0, 3, '에폭(Epoch)', '손실(Loss)');
         let overfitTab = 0;
-
+ 
         function genCurves(complexity) {
           const trainPts = [], valPts = [];
           const underfit = complexity <= 3;
@@ -972,7 +1022,7 @@
           }
           return { trainPts, valPts };
         }
-
+ 
         const OVERFITTABS = [
           {
             label: '1단계 — 과소적합',
@@ -1062,7 +1112,7 @@
             explain: '슬라이더로 모델 복잡도를 조절하면서 Train/Val Loss 변화를 관찰하세요. 복잡도가 너무 낮으면 과소적합, 너무 높으면 과적합이 발생합니다.'
           }
         ];
-
+ 
         const overfitTabRow = document.getElementById('overfit-tabs');
         OVERFITTABS.forEach((t, i) => {
           const b = document.createElement('button');
@@ -1071,7 +1121,7 @@
           b.onclick = () => setOverfitTab(i);
           overfitTabRow.appendChild(b);
         });
-
+ 
         function setOverfitTab(i) {
           overfitTab = i;
           overfitTabRow.querySelectorAll('.tab-btn').forEach((b, j) => b.classList.toggle('active', j === i));
@@ -1080,21 +1130,21 @@
           t.render();
           if (!t.slider) document.getElementById('overfit-explain').textContent = t.explain;
         }
-
+ 
         document.getElementById('overfit-complexity').addEventListener('input', function () {
           document.getElementById('overfit-complexity-label').textContent = this.value;
           if (overfitTab === 3) OVERFITTABS[3].render();
         });
         setOverfitTab(0);
       }
-
+ 
       // ===================== CONVOLUTION =====================
       if (param === 'convolution') {
         const chart = mkChart('conv-chart', 0, 17, 0, 17, '입력 크기', '출력 크기');
         let convTab = 0;
-
+ 
         function outSize(n, f, s, p) { return Math.floor((n + 2 * p - f) / s) + 1; }
-
+ 
         const CONVTABS = [
           {
             label: '1단계 — 기본 연산',
@@ -1204,7 +1254,7 @@
             explain: '슬라이더로 입력 크기, 필터 크기, Stride, Padding을 조절하면서 출력 크기 변화를 확인하세요.'
           }
         ];
-
+ 
         const convTabRow = document.getElementById('conv-tabs');
         CONVTABS.forEach((t, i) => {
           const b = document.createElement('button');
@@ -1213,7 +1263,7 @@
           b.onclick = () => setConvTab(i);
           convTabRow.appendChild(b);
         });
-
+ 
         function setConvTab(i) {
           convTab = i;
           convTabRow.querySelectorAll('.tab-btn').forEach((b, j) => b.classList.toggle('active', j === i));
@@ -1222,7 +1272,7 @@
           t.render();
           if (!t.slider) document.getElementById('conv-explain').textContent = t.explain;
         }
-
+ 
         ['conv-n', 'conv-f', 'conv-s', 'conv-p'].forEach(id => {
           const el = document.getElementById(id);
           if (el) {
@@ -1234,8 +1284,244 @@
         });
         setConvTab(0);
       }
-
-    });
+ 
+      // ===================== FILTER & EDGE =====================
+      if (param === 'filter') {
+        const FILTERS = {
+          sobel_x: {
+            label: 'Sobel X',
+            kernel: [[-1,0,1],[-2,0,2],[-1,0,1]],
+            desc: 'Sobel X 필터는 좌우 방향의 밝기 변화를 감지합니다. 왼쪽(-1,-2,-1)을 빼고 오른쪽(+1,+2,+1)을 더해 수직 경계선(세로 엣지)을 강조합니다. 이미지의 좌→우 전환 구역에서 큰 값이 나타납니다.'
+          },
+          sobel_y: {
+            label: 'Sobel Y',
+            kernel: [[-1,-2,-1],[0,0,0],[1,2,1]],
+            desc: 'Sobel Y 필터는 위아래 방향의 밝기 변화를 감지합니다. 위쪽 행(-1,-2,-1)에서 빼고 아래쪽 행(+1,+2,+1)을 더해 수평 경계선(가로 엣지)을 강조합니다.'
+          },
+          laplacian: {
+            label: 'Laplacian',
+            kernel: [[0,1,0],[1,-4,1],[0,1,0]],
+            desc: 'Laplacian 필터는 방향에 무관하게 모든 방향의 엣지를 동시에 검출합니다. 중심값(-4)에서 4방향 이웃의 합을 빼는 구조로, 밝기가 급격히 변하는 모든 경계에서 큰 값이 나타납니다.'
+          },
+          blur: {
+            label: 'Blur',
+            kernel: [[1,1,1],[1,1,1],[1,1,1]],
+            desc: 'Blur(평균) 필터는 주변 9개 픽셀의 평균값을 취해 이미지를 부드럽게 만듭니다. 엣지 검출과 반대로, 날카로운 경계를 뭉개고 노이즈를 줄이는 데 사용됩니다. 모든 가중치가 동일(1/9)합니다.'
+          }
+        };
+ 
+        const INPUT_IMG = [
+          [255,255,255,0,0,0],
+          [255,255,255,0,0,0],
+          [255,255,255,0,0,0],
+          [255,255,255,0,0,0],
+          [255,255,255,0,0,0],
+          [255,255,255,0,0,0],
+        ];
+ 
+        let currentFilter = 'sobel_x';
+ 
+        function grayHex(v) {
+          const c = Math.round(Math.max(0, Math.min(255, v)));
+          const h = c.toString(16).padStart(2,'0');
+          return '#'+h+h+h;
+        }
+        function fgColor(v) { return v > 140 ? 'rgba(0,0,0,0.7)' : 'rgba(255,255,255,0.85)'; }
+ 
+        function convolveImg(img, kernel) {
+          const out = [];
+          for (let r = 1; r < 5; r++) {
+            const row = [];
+            for (let c = 1; c < 5; c++) {
+              let s = 0;
+              for (let i = 0; i < 3; i++) for (let j = 0; j < 3; j++)
+                s += kernel[i][j] * img[r-1+i][c-1+j];
+              row.push(s);
+            }
+            out.push(row);
+          }
+          return out;
+        }
+ 
+        function normalizeOut(mat) {
+          let mn = Infinity, mx = -Infinity;
+          for (const row of mat) for (const v of row) { mn = Math.min(mn,v); mx = Math.max(mx,v); }
+          if (mx === mn) return mat.map(r => r.map(() => 0));
+          return mat.map(r => r.map(v => ((v - mn)/(mx - mn))*255));
+        }
+ 
+        function drawImgCanvas(canvasId, img, sz, rows, cols) {
+          const cv = document.getElementById(canvasId);
+          if (!cv) return;
+          const ctx = cv.getContext('2d');
+          cv.width = cols * sz; cv.height = rows * sz;
+          for (let r = 0; r < rows; r++) for (let c = 0; c < cols; c++) {
+            const v = img[r][c];
+            ctx.fillStyle = grayHex(v);
+            ctx.fillRect(c*sz, r*sz, sz, sz);
+            ctx.strokeStyle = isDark ? 'rgba(255,255,255,0.08)' : 'rgba(0,0,0,0.08)';
+            ctx.lineWidth = 0.5;
+            ctx.strokeRect(c*sz, r*sz, sz, sz);
+            ctx.fillStyle = fgColor(v);
+            ctx.font = `${Math.round(sz*0.32)}px monospace`;
+            ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+            ctx.fillText(v, c*sz + sz/2, r*sz + sz/2);
+          }
+          ctx.strokeStyle = 'rgba(83,74,183,0.5)';
+          ctx.lineWidth = 1.5;
+          ctx.strokeRect(0, 0, cols*sz, rows*sz);
+        }
+ 
+        function drawOutCanvas(canvasId, raw, normed, filterKey) {
+          const cv = document.getElementById(canvasId);
+          if (!cv) return;
+          const ctx = cv.getContext('2d');
+          const sz = 38; const rows = 4, cols = 4;
+          cv.width = cols*sz; cv.height = rows*sz;
+          for (let r = 0; r < rows; r++) for (let c = 0; c < cols; c++) {
+            const nv = normed[r][c] / 255;
+            let bg;
+            if (filterKey === 'blur') {
+              bg = grayHex(normed[r][c]);
+            } else {
+              const ri = Math.round(20 + nv*59), gi = Math.round(40 + nv*102), bi = Math.round(60 + nv*187);
+              bg = `rgb(${Math.min(255,ri)},${Math.min(255,gi)},${Math.min(255,bi)})`;
+            }
+            ctx.fillStyle = bg;
+            ctx.fillRect(c*sz, r*sz, sz, sz);
+            ctx.strokeStyle = isDark ? 'rgba(255,255,255,0.08)' : 'rgba(0,0,0,0.08)';
+            ctx.lineWidth = 0.5;
+            ctx.strokeRect(c*sz, r*sz, sz, sz);
+            ctx.fillStyle = nv > 0.5 ? 'rgba(255,255,255,0.9)' : 'rgba(0,0,0,0.55)';
+            ctx.font = '11px monospace';
+            ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+            ctx.fillText(Math.round(raw[r][c]), c*sz + sz/2, r*sz + sz/2);
+          }
+          ctx.strokeStyle = 'rgba(83,74,183,0.5)';
+          ctx.lineWidth = 1.5;
+          ctx.strokeRect(0, 0, cols*sz, rows*sz);
+        }
+ 
+        function drawZoomCanvas(canvasId, img, rOff, cOff) {
+          const cv = document.getElementById(canvasId);
+          if (!cv) return;
+          const ctx = cv.getContext('2d');
+          const sz = 42; cv.width = 3*sz; cv.height = 3*sz;
+          for (let i = 0; i < 3; i++) for (let j = 0; j < 3; j++) {
+            const v = img[rOff+i][cOff+j];
+            ctx.fillStyle = grayHex(v);
+            ctx.fillRect(j*sz, i*sz, sz, sz);
+            ctx.strokeStyle = isDark ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,0.1)';
+            ctx.lineWidth = 0.5;
+            ctx.strokeRect(j*sz, i*sz, sz, sz);
+            ctx.fillStyle = fgColor(v);
+            ctx.font = '12px monospace';
+            ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+            ctx.fillText(v, j*sz + sz/2, i*sz + sz/2);
+          }
+          ctx.strokeStyle = CORAL;
+          ctx.lineWidth = 2;
+          ctx.strokeRect(0, 0, 3*sz, 3*sz);
+        }
+ 
+        function kernelHTML(kernel) {
+          return kernel.flat().map(v => {
+            const cls = v > 0 ? 'k-pos' : v < 0 ? 'k-neg' : 'k-zero';
+            return `<div class="k-cell ${cls}">${v}</div>`;
+          }).join('');
+        }
+ 
+        function calcHTML(kernel, img, rOff, cOff) {
+          let parts = [], sum = 0;
+          for (let i = 0; i < 3; i++) for (let j = 0; j < 3; j++) {
+            const pv = img[rOff+i][cOff+j], kv = kernel[i][j], prod = pv*kv;
+            sum += prod;
+            if (kv !== 0) {
+              const cls = kv > 0 ? 'calc-pos' : 'calc-neg';
+              parts.push(`<span class="${cls}">(${pv}×${kv}=${prod})</span>`);
+            }
+          }
+          return parts.join('<br>') + `<br><span class="calc-result">= ${Math.round(sum)}</span>`;
+        }
+ 
+        function renderFilter() {
+          const f = FILTERS[currentFilter];
+          const raw = convolveImg(INPUT_IMG, f.kernel);
+          const normed = normalizeOut(raw);
+ 
+          document.getElementById('filter-main-visual').innerHTML = `
+            <div class="fv-row">
+              <div class="fv-col">
+                <div class="fv-label">입력 이미지 (6×6)</div>
+                <canvas id="fv-input" class="fv-canvas"></canvas>
+              </div>
+              <div class="fv-op">*</div>
+              <div class="fv-col">
+                <div class="fv-label">Filter Kernel (3×3)</div>
+                <div class="kernel-grid" id="fv-kernel">${kernelHTML(f.kernel)}</div>
+              </div>
+              <div class="fv-op">=</div>
+              <div class="fv-col">
+                <div class="fv-label">Feature Map (4×4)</div>
+                <canvas id="fv-output" class="fv-canvas"></canvas>
+              </div>
+            </div>
+            <div style="border-top:1px solid var(--border);padding-top:14px;margin-top:4px;">
+              <div style="font-size:12px;color:var(--text2);margin-bottom:10px;font-weight:500;">계산 과정 — (1,1) 위치 기준</div>
+              <div class="fv-row" style="gap:12px;">
+                <div class="fv-col">
+                  <div class="fv-label">Receptive Field</div>
+                  <canvas id="fv-zoom" class="fv-canvas"></canvas>
+                </div>
+                <div class="fv-op" style="padding-top:14px;">×</div>
+                <div class="fv-col">
+                  <div class="fv-label">Kernel</div>
+                  <div class="kernel-grid">${kernelHTML(f.kernel)}</div>
+                </div>
+                <div class="fv-op" style="padding-top:14px;">=</div>
+                <div class="fv-col">
+                  <div class="fv-label">원소별 곱의 합</div>
+                  <div class="calc-box" id="fv-calc"></div>
+                </div>
+              </div>
+            </div>`;
+ 
+          // draw canvases after DOM update
+          requestAnimationFrame(() => {
+            drawImgCanvas('fv-input', INPUT_IMG, 28, 6, 6);
+            drawOutCanvas('fv-output', raw, normed, currentFilter);
+            drawZoomCanvas('fv-zoom', INPUT_IMG, 1, 1);
+            document.getElementById('fv-calc').innerHTML = calcHTML(f.kernel, INPUT_IMG, 1, 1);
+          });
+ 
+          document.getElementById('filter-formula').innerHTML = `<div class="formula">필터: <strong>${f.label}</strong><br>${
+            currentFilter === 'sobel_x' ? '엣지 방향: <span class="hl-p">세로(수직)</span> — 좌우 밝기 차이 감지' :
+            currentFilter === 'sobel_y' ? '엣지 방향: <span class="hl-t">가로(수평)</span> — 위아래 밝기 차이 감지' :
+            currentFilter === 'laplacian' ? '엣지 방향: <span class="hl-c">전방향</span> — 상하좌우 모두 감지' :
+            '목적: <span class="hl-t">스무딩</span> — 경계를 부드럽게, 노이즈 제거'
+          }<br><br>출력 Feature Map 숫자: 클수록 해당 위치에 강한 엣지가 존재</div>`;
+ 
+          document.getElementById('filter-explain').textContent = f.desc;
+        }
+ 
+        // build filter selector buttons
+        const filterTabRow = document.getElementById('filter-tabs');
+        Object.entries(FILTERS).forEach(([key, f], i) => {
+          const b = document.createElement('button');
+          b.className = 'tab-btn' + (i === 0 ? ' active' : '');
+          b.textContent = f.label;
+          b.onclick = () => {
+            currentFilter = key;
+            filterTabRow.querySelectorAll('.tab-btn').forEach((bb, j) => bb.classList.toggle('active', j === i));
+            renderFilter();
+          };
+          filterTabRow.appendChild(b);
+        });
+ 
+        renderFilter();
+      }
+ 
+    }); // DOMContentLoaded
   </script>
 </body>
 </html>
