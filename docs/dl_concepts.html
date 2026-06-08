@@ -419,7 +419,7 @@
             <div id="calc-display" style="font-size:12px;color:var(--text);line-height:1.6;min-width:120px"></div>
           </div>
         </div>
-        <div style="font-size:11px;color:var(--text2);margin-top:4px">출력 맵의 좌상단 (1,1) 위치 기준 실시간 원소 계산 로그</div>
+        <div style="font-size:11px;color:var(--text2);margin-top:4px">출력 맵의 주황 테두리 위치 기준 실시간 원소 계산 로그</div>
       </div>
 
       <div class="sim-legend">
@@ -445,7 +445,6 @@
       const gridColor = isDark ? 'rgba(255,255,255,0.07)' : 'rgba(0,0,0,0.06)';
 
       const PURPLE = '#534AB7', TEAL = '#1D9E75', CORAL = '#D85A30';
-      const LIGHT_PURPLE = isDark ? 'rgba(83,74,183,0.25)' : 'rgba(83,74,183,0.12)';
 
       function mkChart(id, xMin, xMax, yMin, yMax, xLabel, yLabel) {
         const canvas = document.getElementById(id);
@@ -484,12 +483,6 @@
       function dotDS(pts, color, r) {
         return { type: 'scatter', data: pts, pointBackgroundColor: color, pointRadius: r || 7, pointBorderWidth: 0 };
       }
-      function fillDS(pts, color) {
-        return {
-          type: 'line', data: pts, showLine: true, pointRadius: 0,
-          borderColor: 'transparent', backgroundColor: color, fill: true, tension: 0.4
-        };
-      }
 
       function renderStats(id, arr) {
         const el = document.getElementById(id);
@@ -507,12 +500,6 @@
         function sigmoid(x) { return 1 / (1 + Math.exp(-x)); }
         function relu(x) { return Math.max(0, x); }
         function tanh_(x) { return Math.tanh(x); }
-
-        function range(a, b, step) {
-          const pts = [];
-          for (let x = a; x <= b; x += step) pts.push({ x: parseFloat(x.toFixed(3)), y: 0 });
-          return pts;
-        }
 
         const ACTTABS = [
           {
@@ -612,7 +599,6 @@
         const LOSSTABS = [
           {
             label: '1단계 — Cross-Entropy란',
-            slider: false,
             render() {
               if (!chart) return;
               chart.options.scales.x.min = 0; chart.options.scales.x.max = 1;
@@ -636,7 +622,6 @@
           },
           {
             label: '2단계 — 학습 곡선',
-            slider: false,
             render() {
               if (!chart) return;
               chart.options.scales.x.min = 0; chart.options.scales.x.max = 50;
@@ -666,7 +651,6 @@
           },
           {
             label: '3단계 — CE vs MSE 비교',
-            slider: false,
             render() {
               if (!chart) return;
               chart.options.scales.x.min = 0; chart.options.scales.x.max = 1;
@@ -804,7 +788,7 @@
                 row.forEach((v, c) => {
                   const isEye = (r===1 && (c===1||c===2));
                   const bg = `rgba(83,74,183, ${v/255})`;
-                  const color = v > 128 ? '#fff' : var(--text);
+                  const color = v > 128 ? '#fff' : '#1a1a1a';
                   h += `<div class="pixel-cell ${isEye?'pixel-highlight':''}" style="background:${bg}; color:${color}">${v}</div>`;
                 });
                 h += '</div>';
@@ -825,7 +809,7 @@
               arr.forEach((v, i) => {
                 const isEye = (i===5 || i===6);
                 const bg = `rgba(83,74,183, ${v/255})`;
-                const color = v > 128 ? '#fff' : var(--text);
+                const color = v > 128 ? '#fff' : '#1a1a1a';
                 h += `<div class="flat-cell ${isEye?'pixel-highlight':''}" style="background:${bg}; color:${color}; ${isEye?'outline: 2px solid var(--coral);':''}">${v}</div>`;
               });
               h += '</div>';
@@ -858,12 +842,10 @@
       // ===================== OVERFIT =====================
       if (param === 'overfit') {
         const chart = mkChart('overfit-chart', 1, 10, 0, 10, '모델 복잡도 (용량)', '오차 (Loss)');
-        let overfitTab = 0;
 
         const OVERFITTABS = [
           {
             label: '개념 그래프 확인',
-            slider: true,
             render() {
               if (!chart) return;
               chart.options.scales.x.title.text = '모델 복잡도';
@@ -872,7 +854,7 @@
               const tPts = [], vPts = [];
               for (let x = 1; x <= 10; x += 0.2) {
                 const t = 9 * Math.exp(-0.4 * x) + 0.3;
-                const v = 8 * Math.exp(-0.4 * x) + 0.5 + 0.05 * Math. confectionery * Math.pow(x - 4.5, 2) * (x > 4.5 ? 1.5 : 0.4);
+                const v = 8 * Math.exp(-0.4 * x) + 0.5 + 0.05 * Math.pow(x - 4.5, 2) * (x > 4.5 ? 1.5 : 0.4);
                 tPts.push({ x: x, y: t });
                 vPts.push({ x: x, y: v });
               }
@@ -923,12 +905,10 @@
       // ===================== CONVOLUTION & SIMULATOR =====================
       if (param === 'convolution') {
         const chart = mkChart('conv-chart', 0, 10, 0, 10, '', '');
-        let convTab = 0;
 
         const CONVTABS = [
           {
             label: '크기 계산 시뮬레이터',
-            slider: true,
             render() {
               const n = parseInt(document.getElementById('conv-n').value);
               const f = parseInt(document.getElementById('conv-f').value);
@@ -984,7 +964,7 @@
         CONVTABS[0].render();
 
         // -------------------------------------------------------------
-        // 여기서부터 파일 2의 인터랙티브 에지 검출 엔진 통합부 로직 시작
+        // 필터 인터랙티브 에지 검출 엔진
         // -------------------------------------------------------------
         const inputImage = [
           [255, 255, 255, 0, 0, 0],
@@ -1019,7 +999,7 @@
         };
 
         let currentFilter = 'sobel_x';
-        let activeR = 1, activeC = 1; // 연산 하이라이트 디폴트 위치
+        let activeR = 1, activeC = 1;
 
         const cvInput = document.getElementById('c-input');
         const cvOutput = document.getElementById('c-output');
@@ -1085,7 +1065,6 @@
               ctx.strokeRect(c * sz, r * sz, sz, sz);
             }
           }
-          // Receptive field 하이라이트
           ctx.strokeStyle = '#EF9F27';
           ctx.lineWidth = 3;
           ctx.strokeRect((activeC - 1) * sz, (activeR - 1) * sz, sz * 3, sz * 3);
@@ -1100,7 +1079,6 @@
           for (let r = 0; r < 4; r++) {
             for (let c = 0; c < 4; c++) {
               let val = outMap[r][c];
-              // 시각화를 위한 스케일 변환 보정
               if (currentFilter !== 'blur') {
                 val = Math.min(255, Math.abs(val));
               }
@@ -1171,7 +1149,6 @@
           renderCalculationText();
         }
 
-        // 시뮬레이터 전용 버튼 이벤트 바인딩
         ['sobel_x', 'sobel_y', 'laplacian', 'blur'].forEach(fKey => {
           document.getElementById('btn-' + fKey).addEventListener('click', function() {
             document.querySelectorAll('.sim-btn').forEach(b => b.classList.remove('active'));
@@ -1181,14 +1158,12 @@
           });
         });
 
-        // 입력 및 출력 캔버스 클릭 시 영역 매핑 전환
         cvInput.addEventListener('click', function(e) {
           const rect = cvInput.getBoundingClientRect();
           const cx = e.clientX - rect.left;
           const cy = e.clientY - rect.top;
           const c = Math.floor(cx / 30) + 1;
           const r = Math.floor(cy / 30) + 1;
-          // 3x3 필터가 벗어나지 않게 제어
           activeC = Math.max(1, Math.min(4, c));
           activeR = Math.max(1, Math.min(4, r));
           updateSim();
@@ -1203,7 +1178,6 @@
           updateSim();
         });
 
-        // 초기 실행
         updateSim();
       }
     });
