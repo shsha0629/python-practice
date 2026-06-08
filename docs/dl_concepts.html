@@ -24,12 +24,6 @@
       --red-text: #b91c1c;
       --blue-bg: #dbeafe;
       --blue-text: #1d4ed8;
-      
-      /* 커널 필터용 추가 변수 */
-      --k-pos-bg: #E1F5EE;
-      --k-pos-text: #085041;
-      --k-neg-bg: #FCEBEB;
-      --k-neg-text: #791F1F;
     }
 
     @media (prefers-color-scheme: dark) {
@@ -48,12 +42,6 @@
         --red-text: #f09595;
         --blue-bg: #1a2e4a;
         --blue-text: #85b7eb;
-
-        /* 다크모드 커널 필터 변수 */
-        --k-pos-bg: #163a2f;
-        --k-pos-text: #7ee0c2;
-        --k-neg-bg: #3d1c1c;
-        --k-neg-text: #fca5a5;
       }
     }
 
@@ -193,30 +181,11 @@
       font-size: 10px; font-family: monospace; font-weight: 500;
       border: 1px solid var(--border);
     }
-
-    /* 필터 에지 검출 시뮬레이터용 스타일 병합 및 최적화 */
-    .sim-wrap { padding: 15px 0; border-top: 1px dashed var(--border); margin-top: 25px; }
-    .grid-wrap { display: flex; gap: 20px; align-items: flex-start; flex-wrap: wrap; margin-bottom: 20px; justify-content: center; }
-    .col { display: flex; flex-direction: column; align-items: center; gap: 6px; }
-    .col-title { font-size: 13px; font-weight: 500; color: var(--text); text-align: center; }
-    .col-sub { font-size: 11px; color: var(--text2); text-align: center; line-height: 1.4; }
-    .sim-wrap canvas { display: block; image-rendering: pixelated; border-radius: 4px; border: 1px solid var(--border); background: var(--bg); }
-    .filter-btn-row { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 16px; justify-content: center; }
-    .sim-btn { font-size: 12px; padding: 6px 14px; border-radius: 6px; border: 1px solid var(--border); background: var(--bg2); color: var(--text); cursor: pointer; transition: all .15s; }
-    .sim-btn.active { border: 1.5px solid #185FA5; color: #0C447C; background: #E6F1FB; font-weight: 500; }
-    .kernel-grid { display: grid; grid-template-columns: repeat(3, 36px); gap: 2px; margin-top: 4px; }
-    .kernel-cell { width: 36px; height: 36px; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 500; border-radius: 4px; }
-    .k-pos { background: var(--k-pos-bg); color: var(--k-pos-text); }
-    .k-neg { background: var(--k-neg-bg); color: var(--k-neg-text); }
-    .k-zero { background: var(--bg2); color: var(--text2); border: 1px solid var(--border); }
-    .arrow-mid { font-size: 20px; color: var(--text2); align-self: center; font-weight: bold; padding-top: 10px; }
-    .sim-legend { display: flex; gap: 16px; margin-top: 10px; font-size: 11px; color: var(--text2); align-items: center; justify-content: center; }
-    .leg-box { width: 14px; height: 14px; border-radius: 3px; display: inline-block; margin-right: 4px; vertical-align: middle; }
-    #calc-display { font-family: monospace; font-size: 11px; max-width: 200px; word-break: break-all; }
   </style>
 </head>
 <body>
 
+  <!-- INDEX -->
   <div id="page-index" class="graph-section">
     <h2>DL 개념 그래프 모음</h2>
     <p class="subtitle">아래 카드를 클릭하거나, 주소 뒤에 해시태그를 직접 붙여서 이동하세요</p>
@@ -254,6 +223,7 @@
     </div>
   </div>
 
+  <!-- ACTIVATION -->
   <div id="page-activation" class="graph-section">
     <h2>활성화 함수</h2>
     <p class="subtitle">함수를 선택하고 입력값 x를 슬라이더로 조절해보세요</p>
@@ -271,6 +241,7 @@
     <div class="explain-box" id="act-explain"></div>
   </div>
 
+  <!-- LOSS -->
   <div id="page-loss" class="graph-section">
     <h2>손실 함수와 학습</h2>
     <p class="subtitle">단계별로 손실 함수의 의미와 학습 과정을 확인하세요</p>
@@ -290,6 +261,7 @@
     <div class="explain-box" id="loss-explain"></div>
   </div>
 
+  <!-- GRADIENT -->
   <div id="page-gradient" class="graph-section">
     <h2>경사 하강법</h2>
     <p class="subtitle">학습률(Learning Rate)이 수렴에 미치는 영향을 직접 확인하세요</p>
@@ -314,6 +286,7 @@
     <div class="explain-box" id="grad-explain"></div>
   </div>
 
+  <!-- FLATTEN -->
   <div id="page-flatten" class="graph-section">
     <h2>Flatten과 공간 정보 손실</h2>
     <p class="subtitle">2D 이미지를 1D로 펼칠 때 위치 관계가 사라지는 과정을 확인하세요</p>
@@ -324,6 +297,7 @@
     <div class="explain-box" id="flat-explain"></div>
   </div>
 
+  <!-- OVERFIT -->
   <div id="page-overfit" class="graph-section">
     <h2>과적합 vs 과소적합</h2>
     <p class="subtitle">모델 복잡도 슬라이더로 Train/Validation Loss 변화를 확인하세요</p>
@@ -343,6 +317,7 @@
     <div class="explain-box" id="overfit-explain"></div>
   </div>
 
+  <!-- CONVOLUTION -->
   <div id="page-convolution" class="graph-section">
     <h2>Convolution 연산</h2>
     <p class="subtitle">Stride와 Padding이 출력 Feature Map 크기에 어떤 영향을 주는지 확인하세요</p>
@@ -367,67 +342,6 @@
     <div class="stat-row" id="conv-stats"></div>
     <div id="conv-formula"></div>
     <div class="explain-box" id="conv-explain"></div>
-
-    <div class="sim-wrap">
-      <h2>Convolution Filter와 Edge 검출 인터랙티브 시뮬레이터</h2>
-      <p class="subtitle" style="margin-bottom:12px;">필터를 선택하고 실제 행렬곱 이미지 특징 추출 연산을 시각적으로 확인하세요</p>
-      
-      <div class="filter-btn-row">
-        <button class="sim-btn active" id="btn-sobel_x">Sobel X (수직 엣지)</button>
-        <button class="sim-btn" id="btn-sobel_y">Sobel Y (수평 엣지)</button>
-        <button class="sim-btn" id="btn-laplacian">Laplacian (전방향 엣지)</button>
-        <button class="sim-btn" id="btn-blur">Blur (스무딩)</button>
-      </div>
-
-      <div class="grid-wrap">
-        <div class="col">
-          <div class="col-title">입력 이미지</div>
-          <div class="col-sub">6×6 픽셀 (좌=밝음 / 우=어둠)</div>
-          <canvas id="c-input" width="180" height="180"></canvas>
-        </div>
-        <div class="arrow-mid">*</div>
-        <div class="col">
-          <div class="col-title">Filter (Kernel)</div>
-          <div class="col-sub">3×3 가중치</div>
-          <div class="kernel-grid" id="kernel-display"></div>
-        </div>
-        <div class="arrow-mid">=</div>
-        <div class="col">
-          <div class="col-title">출력 Feature Map</div>
-          <div class="col-sub">4×4 (엣지 강도)</div>
-          <canvas id="c-output" width="160" height="160"></canvas>
-        </div>
-      </div>
-
-      <div class="explain-box" id="desc-box" style="margin-bottom: 20px; border-left-color: var(--teal);"></div>
-
-      <div style="border-top:1px solid var(--border); padding-top:16px">
-        <div class="col-title" style="margin-bottom:10px;text-align:left">Convolution 구체적 계산 과정</div>
-        <div class="grid-wrap" style="gap:16px; justify-content: flex-start;">
-          <div class="col">
-            <div class="col-sub" style="margin-bottom:4px;">입력 Receptive Field (3x3)</div>
-            <canvas id="c-zoom-input" width="135" height="135"></canvas>
-          </div>
-          <div class="arrow-mid" style="padding-top:12px">×</div>
-          <div class="col">
-            <div class="col-sub" style="margin-bottom:4px;">Filter 가중치</div>
-            <div class="kernel-grid" id="kernel-display2"></div>
-          </div>
-          <div class="arrow-mid" style="padding-top:12px">=</div>
-          <div class="col">
-            <div class="col-sub" style="margin-bottom:4px;">원소별 곱의 합</div>
-            <div id="calc-display" style="font-size:12px;color:var(--text);line-height:1.6;min-width:120px"></div>
-          </div>
-        </div>
-        <div style="font-size:11px;color:var(--text2);margin-top:4px">출력 맵의 주황 테두리 위치 기준 실시간 원소 계산 로그</div>
-      </div>
-
-      <div class="sim-legend">
-        <span><span class="leg-box" style="background:#fff;border:1px solid #ccc"></span>밝음 (255)</span>
-        <span><span class="leg-box" style="background:#1a1a1a"></span>어두움 (0)</span>
-        <span><span class="leg-box" style="background:#EF9F27"></span>현재 연산 영역 주황 테두리</span>
-      </div>
-    </div>
   </div>
 
   <script>
@@ -445,6 +359,7 @@
       const gridColor = isDark ? 'rgba(255,255,255,0.07)' : 'rgba(0,0,0,0.06)';
 
       const PURPLE = '#534AB7', TEAL = '#1D9E75', CORAL = '#D85A30';
+      const LIGHT_PURPLE = isDark ? 'rgba(83,74,183,0.25)' : 'rgba(83,74,183,0.12)';
 
       function mkChart(id, xMin, xMax, yMin, yMax, xLabel, yLabel) {
         const canvas = document.getElementById(id);
@@ -483,6 +398,12 @@
       function dotDS(pts, color, r) {
         return { type: 'scatter', data: pts, pointBackgroundColor: color, pointRadius: r || 7, pointBorderWidth: 0 };
       }
+      function fillDS(pts, color) {
+        return {
+          type: 'line', data: pts, showLine: true, pointRadius: 0,
+          borderColor: 'transparent', backgroundColor: color, fill: true, tension: 0.4
+        };
+      }
 
       function renderStats(id, arr) {
         const el = document.getElementById(id);
@@ -500,6 +421,12 @@
         function sigmoid(x) { return 1 / (1 + Math.exp(-x)); }
         function relu(x) { return Math.max(0, x); }
         function tanh_(x) { return Math.tanh(x); }
+
+        function range(a, b, step) {
+          const pts = [];
+          for (let x = a; x <= b; x += step) pts.push({ x: parseFloat(x.toFixed(3)), y: 0 });
+          return pts;
+        }
 
         const ACTTABS = [
           {
@@ -595,10 +522,11 @@
         let lossTab = 0;
 
         function crossEntropy(p) { return -Math.log(Math.max(p, 1e-9)); }
-        
+
         const LOSSTABS = [
           {
             label: '1단계 — Cross-Entropy란',
+            slider: false,
             render() {
               if (!chart) return;
               chart.options.scales.x.min = 0; chart.options.scales.x.max = 1;
@@ -622,6 +550,7 @@
           },
           {
             label: '2단계 — 학습 곡선',
+            slider: false,
             render() {
               if (!chart) return;
               chart.options.scales.x.min = 0; chart.options.scales.x.max = 50;
@@ -651,6 +580,7 @@
           },
           {
             label: '3단계 — CE vs MSE 비교',
+            slider: false,
             render() {
               if (!chart) return;
               chart.options.scales.x.min = 0; chart.options.scales.x.max = 1;
@@ -672,17 +602,38 @@
                 { label: 'p̂=0.1일 때 MSE', val: ((1 - 0.1) ** 2).toFixed(3) },
                 { label: '분류 추천', val: '✅ Cross-Entropy' }
               ]);
-              document.getElementById('loss-formula').innerHTML = `<div class="formula"><span class="hl-p">━━</span> Cross-Entropy (분류) &nbsp;&nbsp; <span class="hl-t">╌╌╌</span> MSE (회귀)<br><br>틀렸을 때(p̂가 0에 가깝울 때) Cross-Entropy가 MSE보다 훨씬 강한 벌점을 부여합니다.</div>`;
-            }
+              document.getElementById('loss-formula').innerHTML = `<div class="formula"><span class="hl-p">━━</span> Cross-Entropy: −log(p̂)<br><span class="hl-t">╌╌╌</span> MSE: (1 − p̂)²<br><br>분류엔 CE, 회귀엔 MSE가 적합합니다</div>`;
+            },
+            explain: '분류 문제에서 MSE 대신 Cross-Entropy를 쓰는 이유는 기울기(Gradient) 때문입니다. p̂이 0.1처럼 크게 틀렸을 때 CE는 패널티를 크게 주어 빠른 수정을 유도하지만, MSE는 기울기가 작아 학습이 느려집니다. CE가 분류에 더 적합한 이유입니다.'
+          },
+          {
+            label: '4단계 — 직접 조절',
+            slider: true,
+            render() {
+              if (!chart) return;
+              const p = parseFloat(document.getElementById('loss-p').value);
+              chart.options.scales.x.min = 0; chart.options.scales.x.max = 1;
+              chart.options.scales.y.min = 0; chart.options.scales.y.max = 5.5;
+              chart.options.scales.x.title = { display: true, text: '예측값 p̂', color: textColor, font: { size: 12 } };
+              chart.options.scales.y.title = { display: true, text: '손실', color: textColor, font: { size: 12 } };
+              const cePts = [];
+              for (let pp = 0.01; pp <= 0.99; pp += 0.01) cePts.push({ x: parseFloat(pp.toFixed(2)), y: crossEntropy(pp) });
+              const lossVal = crossEntropy(p);
+              chart.data.datasets = [
+                lineDS(cePts, PURPLE, [], 2.5),
+                dotDS([{ x: p, y: lossVal }], CORAL, 9)
+              ];
+              chart.update();
+              renderStats('loss-stats', [
+                { label: '현재 p̂', val: p.toFixed(2) },
+                { label: 'CE Loss', val: lossVal.toFixed(4) },
+                { label: '평가', val: p >= 0.7 ? '✅ 잘 예측 중' : p >= 0.4 ? '⚠️ 보통' : '❌ 크게 틀림' }
+              ]);
+              document.getElementById('loss-formula').innerHTML = `<div class="formula">Loss = −log(<span class="hl-p">${p.toFixed(2)}</span>) = <span class="hl-c">${lossVal.toFixed(4)}</span><br><br>${p >= 0.5 ? '정답에 가까울수록 Loss가 0에 수렴합니다' : '예측이 틀릴수록 Loss가 급격히 커집니다'}</div>`;
+            },
+            explain: '슬라이더로 예측 확률 p̂을 조절해보세요. 정답이 1(y=1)일 때 p̂이 높을수록 Loss가 0에 가까워집니다. p̂이 0.1처럼 낮으면 Loss가 2.3 이상으로 커지는 것을 확인할 수 있습니다.'
           }
         ];
-
-        function setLossTab(i) {
-          lossTab = i;
-          document.getElementById('loss-tabs').querySelectorAll('.tab-btn').forEach((b, j) => b.classList.toggle('active', j === i));
-          LOSSTABS[i].render();
-          document.getElementById('loss-explain').textContent = LOSSTABS[i].explain || '';
-        }
 
         const lossTabRow = document.getElementById('loss-tabs');
         LOSSTABS.forEach((t, i) => {
@@ -692,71 +643,143 @@
           b.onclick = () => setLossTab(i);
           lossTabRow.appendChild(b);
         });
+
+        function setLossTab(i) {
+          lossTab = i;
+          lossTabRow.querySelectorAll('.tab-btn').forEach((b, j) => b.classList.toggle('active', j === i));
+          const t = LOSSTABS[i];
+          document.getElementById('loss-slider-area').style.display = t.slider ? 'block' : 'none';
+          t.render();
+          document.getElementById('loss-explain').textContent = t.explain;
+        }
+
+        document.getElementById('loss-p').addEventListener('input', function () {
+          document.getElementById('loss-p-label').textContent = parseFloat(this.value).toFixed(2);
+          if (lossTab === 3) LOSSTABS[3].render();
+        });
         setLossTab(0);
       }
 
       // ===================== GRADIENT =====================
       if (param === 'gradient') {
-        const chart = mkChart('grad-chart', -4.5, 4.5, -0.5, 17, '가중치 (w)', '손실 f(w)');
+        const chart = mkChart('grad-chart', -5, 5, -0.5, 25, 'w (가중치)', 'J(w) (손실)');
         let gradTab = 0;
 
-        function lossFn(w) { return w * w; }
-        function gradFn(w) { return 2 * w; }
+        function J(w) { return w * w; }
+        function dJ(w) { return 2 * w; }
+
+        function gradientDescent(w0, lr, steps) {
+          const path = [{ x: w0, y: J(w0) }];
+          let w = w0;
+          for (let i = 0; i < steps; i++) {
+            w = w - lr * dJ(w);
+            path.push({ x: parseFloat(w.toFixed(4)), y: parseFloat(J(w).toFixed(4)) });
+            if (Math.abs(w) < 0.001) break;
+          }
+          return path;
+        }
+
+        const curvePts = [];
+        for (let w = -5; w <= 5; w += 0.05) curvePts.push({ x: parseFloat(w.toFixed(2)), y: J(w) });
 
         const GRADTABS = [
           {
-            label: '적절한 Learning Rate (lr = 0.4)',
-            lr: 0.4, w0: 3.5,
-            explain: '적절한 학습률에서는 손실 함수의 최솟값을 향해 안정적이고 빠르게 수렴합니다. 기울기의 반대 방향으로 단계를 밟아가며 가중치가 업데이트됩니다.'
+            label: '1단계 — 손실 함수',
+            slider: false,
+            render() {
+              if (!chart) return;
+              chart.options.scales.y.max = 25;
+              chart.data.datasets = [
+                lineDS(curvePts, PURPLE, [], 2.5),
+                dotDS([{ x: 3.5, y: J(3.5) }], CORAL, 9)
+              ];
+              chart.update();
+              renderStats('grad-stats', [
+                { label: 'w = 3.5 일 때 J(w)', val: J(3.5).toFixed(1) },
+                { label: '최솟값 위치', val: 'w = 0' },
+                { label: '최솟값', val: 'J(w) = 0' }
+              ]);
+              document.getElementById('grad-formula').innerHTML = `<div class="formula">J(w) = w² (단순화된 손실 함수)<br><br>학습 목표: J(w)를 최소화하는 w를 찾자</div>`;
+            },
+            explain: '경사 하강법은 손실 함수 J(w)의 기울기(미분값)를 이용해 최솟값을 향해 조금씩 이동하는 최적화 방법입니다. 산 위에서 경사를 따라 내려오는 것과 같습니다. 이 예시는 J(w)=w²으로 최솟값이 w=0에 있습니다.'
           },
           {
-            label: '너무 작은 Learning Rate (lr = 0.05)',
-            lr: 0.05, w0: 3.5,
-            explain: '학습률이 지나치게 작으면 보폭이 너무 좁아 수렴하는 데 오랜 시간이 걸립니다. 에폭이 많이 필요해 계산 비용이 증가하고 국소 최솟값에 갇히기 쉽습니다.'
+            label: '2단계 — 기울기 방향',
+            slider: false,
+            render() {
+              if (!chart) return;
+              chart.options.scales.y.max = 25;
+              const w = 3;
+              const slope = dJ(w);
+              const tangentPts = [{ x: 1, y: J(w) + slope * (1 - w) }, { x: 5, y: J(w) + slope * (5 - w) }];
+              chart.data.datasets = [
+                lineDS(curvePts, PURPLE, [], 2.5),
+                lineDS(tangentPts, TEAL, [5, 4], 2),
+                dotDS([{ x: w, y: J(w) }], CORAL, 9)
+              ];
+              chart.update();
+              renderStats('grad-stats', [
+                { label: 'w = 3 에서 기울기', val: slope.toFixed(1) },
+                { label: '이동 방향', val: '← 음수 방향' },
+                { label: '다음 w (lr=0.1)', val: (w - 0.1 * slope).toFixed(2) }
+              ]);
+              document.getElementById('grad-formula').innerHTML = `<div class="formula">w<sub>new</sub> = w<sub>old</sub> − lr × <span class="hl-t">∂J/∂w</span><br>= ${w} − 0.1 × <span class="hl-t">${slope}</span><br>= <span class="hl-p">${(w - 0.1 * slope).toFixed(2)}</span></div>`;
+            },
+            explain: '기울기(∂J/∂w)가 양수이면 현재 위치가 최솟값 오른쪽에 있다는 뜻입니다. 기울기 반대 방향(-방향)으로 이동해 최솟값에 가까워집니다. 학습률(lr)은 한 번에 얼마나 이동할지를 결정합니다.'
           },
           {
-            label: '너무 큰 Learning Rate (lr = 1.05)',
-            lr: 1.05, w0: 0.5,
-            explain: '학습률이 너무 크면 최솟값을 지나치고 반대편으로 튕겨 나가는 진동(Overshooting) 현상이 발생합니다. 최악의 경우 발산하여 학습이 완전히 실패합니다.'
+            label: '3단계 — 수렴 과정',
+            slider: false,
+            render() {
+              if (!chart) return;
+              chart.options.scales.y.max = 25;
+              const path = gradientDescent(3.5, 0.2, 12);
+              chart.data.datasets = [
+                lineDS(curvePts, PURPLE, [], 2.5),
+                lineDS(path, TEAL, [], 1.5),
+                dotDS(path.map((p, i) => i === 0 || i === path.length - 1 ? p : null).filter(Boolean), CORAL, 8)
+              ];
+              chart.update();
+              const final = path[path.length - 1];
+              renderStats('grad-stats', [
+                { label: '시작 w', val: '3.5' },
+                { label: '최종 w (' + (path.length - 1) + '스텝)', val: final.x.toFixed(4) },
+                { label: '최종 Loss', val: final.y.toFixed(6) }
+              ]);
+              document.getElementById('grad-formula').innerHTML = `<div class="formula">lr = 0.2, 시작 w = 3.5<br><br>매 스텝: w ← w − 0.2 × 2w<br>${path.slice(0, 4).map((p, i) => `스텝 ${i}: w = ${p.x.toFixed(3)}`).join('<br>')}<br>...</div>`;
+            },
+            explain: '학습률 0.2로 w=3.5에서 시작하면 몇 스텝 만에 최솟값(w≈0)에 가까워집니다. 각 스텝에서 기울기(2w)를 계산하고 그 반대 방향으로 이동합니다. 실제 딥러닝에서는 수천만 개의 파라미터에 대해 이 과정을 반복합니다.'
+          },
+          {
+            label: '4단계 — 학습률 실험',
+            slider: true,
+            render() {
+              if (!chart) return;
+              const lr = parseFloat(document.getElementById('grad-lr').value);
+              const w0 = parseFloat(document.getElementById('grad-w0').value);
+              chart.options.scales.y.max = 25;
+              const path = gradientDescent(w0, lr, 20);
+              const diverged = path.some(p => Math.abs(p.x) > 4.9 || p.y > 24);
+              chart.data.datasets = [
+                lineDS(curvePts, PURPLE, [], 2.5),
+                lineDS(path, diverged ? CORAL : TEAL, [], 2),
+                dotDS([path[0]], '#888', 8),
+                dotDS([path[path.length - 1]], diverged ? CORAL : TEAL, 9)
+              ];
+              chart.update();
+              const final = path[path.length - 1];
+              const converged = Math.abs(final.x) < 0.05;
+              renderStats('grad-stats', [
+                { label: '학습률', val: lr.toFixed(2) },
+                { label: '최종 w', val: final.x.toFixed(3) },
+                { label: '상태', val: converged ? '✅ 수렴' : diverged ? '❌ 발산' : '⚠️ 미수렴' }
+              ]);
+              document.getElementById('grad-formula').innerHTML = `<div class="formula">lr = <span class="hl-p">${lr.toFixed(2)}</span>, 시작 w₀ = ${w0.toFixed(1)}<br><br>${converged ? '잘 수렴했습니다!' : diverged ? 'lr이 너무 커서 발산합니다. lr을 줄여보세요.' : 'lr이 작아 아직 수렴 중입니다.'}</div>`;
+              document.getElementById('grad-explain').textContent = lr < 0.05 ? '학습률이 너무 작으면 수렴이 매우 느립니다. 최솟값에 도달하려면 많은 스텝이 필요합니다.' : lr > 0.9 ? '학습률이 너무 크면 최솟값을 지나쳐 발산합니다. 실제 학습에서 Loss가 발산하면 lr을 줄여야 합니다.' : '적절한 학습률은 빠르게 수렴합니다. 너무 크지도 작지도 않은 lr을 찾는 것이 중요합니다.';
+            },
+            explain: '슬라이더로 학습률과 시작 위치를 바꿔보세요. lr이 너무 작으면 수렴이 느리고, 너무 크면 발산합니다. 실제 딥러닝에서는 lr을 자동으로 조절하는 Adam 같은 옵티마이저를 사용합니다.'
           }
         ];
-
-        function setGradTab(i) {
-          gradTab = i;
-          document.getElementById('grad-tabs').querySelectorAll('.tab-btn').forEach((b, j) => b.classList.toggle('active', j === i));
-          renderGrad();
-        }
-
-        function renderGrad() {
-          if (!chart) return;
-          const t = GRADTABS[gradTab];
-          
-          const fnPts = [];
-          for (let w = -4.2; w <= 4.2; w += 0.1) fnPts.push({ x: w, y: lossFn(w) });
-
-          let curW = t.w0;
-          const path = [{ x: curW, y: lossFn(curW) }];
-          for (let step = 0; step < 8; step++) {
-            const g = gradFn(curW);
-            curW = curW - t.lr * g;
-            path.push({ x: curW, y: lossFn(curW) });
-          }
-
-          chart.data.datasets = [
-            lineDS(fnPts, textColor, [], 1.5),
-            lineDS(path, CORAL, [], 2),
-            dotDS(path, PURPLE, 5)
-          ];
-          chart.update();
-
-          renderStats('grad-stats', [
-            { label: '설정 학습률', val: t.lr },
-            { label: '시작 위치', val: t.w0.toFixed(2) },
-            { label: '최종 위치 (8회)', val: path[8].x.toFixed(3) }
-          ]);
-          document.getElementById('grad-formula').innerHTML = `<div class="formula">경사 하강법 가중치 업데이트 공식:<br>w ≔ w − <span class="hl-c">lr</span> × <span class="hl-p">f′(w)</span></div>`;
-          document.getElementById('grad-explain').textContent = t.explain;
-        }
 
         const gradTabRow = document.getElementById('grad-tabs');
         GRADTABS.forEach((t, i) => {
@@ -766,68 +789,145 @@
           b.onclick = () => setGradTab(i);
           gradTabRow.appendChild(b);
         });
+
+        function setGradTab(i) {
+          gradTab = i;
+          gradTabRow.querySelectorAll('.tab-btn').forEach((b, j) => b.classList.toggle('active', j === i));
+          const t = GRADTABS[i];
+          document.getElementById('grad-slider-area').style.display = t.slider ? 'block' : 'none';
+          t.render();
+          if (!t.slider) document.getElementById('grad-explain').textContent = t.explain;
+        }
+
+        ['grad-lr', 'grad-w0'].forEach(id => {
+          const el = document.getElementById(id);
+          if (el) {
+            el.addEventListener('input', function () {
+              document.getElementById(id + '-label').textContent = parseFloat(this.value).toFixed(2);
+              if (gradTab === 3) GRADTABS[3].render();
+            });
+          }
+        });
         setGradTab(0);
       }
 
       // ===================== FLATTEN =====================
       if (param === 'flatten') {
         let flatTab = 0;
+
+        const IMG = [
+          [220, 220, 10, 10],
+          [220, 220, 10, 10],
+          [10,  10, 200, 200],
+          [10,  10, 200, 200]
+        ];
+
+        function grayHex(v) {
+          const c = Math.round(Math.max(0, Math.min(255, v)));
+          const h = c.toString(16).padStart(2, '0');
+          return '#' + h + h + h;
+        }
+        function textColor_(v) { return v > 140 ? '#333' : '#ddd'; }
+
+        function render2D(highlight) {
+          let html = '<div style="margin:12px 0 8px"><div style="font-size:12px;color:var(--text2);margin-bottom:6px;">4×4 이미지 — 각 픽셀이 (행, 열) 위치를 가짐</div>';
+          for (let r = 0; r < 4; r++) {
+            html += '<div class="pixel-row">';
+            for (let c = 0; c < 4; c++) {
+              const v = IMG[r][c];
+              const isHL = highlight && highlight.some(h => h[0] === r && h[1] === c);
+              html += `<div class="pixel-cell${isHL ? ' pixel-highlight' : ''}" style="background:${grayHex(v)};color:${textColor_(v)}">${v}<br><span style="font-size:9px;opacity:.6">(${r},${c})</span></div>`;
+            }
+            html += '</div>';
+          }
+          html += '</div>';
+          return html;
+        }
+
+        function renderFlat(highlightIdx) {
+          const flat = IMG.flat();
+          let html = '<div style="font-size:12px;color:var(--text2);margin-bottom:6px;margin-top:12px;">Flatten → 1D 벡터 (16개)</div><div class="flat-row">';
+          flat.forEach((v, i) => {
+            const isHL = highlightIdx !== undefined && highlightIdx === i;
+            html += `<div class="flat-cell${isHL ? ' pixel-highlight' : ''}" style="background:${grayHex(v)};color:${textColor_(v)}">[${i}]</div>`;
+          });
+          html += '</div>';
+          return html;
+        }
+
         const FLATTABS = [
           {
-            label: '1단계 — 2D 공간 정보',
+            label: '1단계 — 원본 2D',
             render() {
-              let h = '<div style="margin-bottom:10px; font-weight:500; font-size:13px;">4×4 바이너리 입력 이미지</div>';
-              const matrix = [
-                [0,255,255,0],
-                [255,0,0,255],
-                [255,255,255,255],
-                [255,0,0,255]
-              ];
-              matrix.forEach((row, r) => {
-                h += '<div class="pixel-row">';
-                row.forEach((v, c) => {
-                  const isEye = (r===1 && (c===1||c===2));
-                  const bg = `rgba(83,74,183, ${v/255})`;
-                  const color = v > 128 ? '#fff' : '#1a1a1a';
-                  h += `<div class="pixel-cell ${isEye?'pixel-highlight':''}" style="background:${bg}; color:${color}">${v}</div>`;
-                });
-                h += '</div>';
-              });
-              document.getElementById('flat-visual').innerHTML = h;
+              document.getElementById('flat-visual').innerHTML = render2D();
               renderStats('flat-stats', [
-                { label: '구조', val: '2D Matrix (4 × 4)' },
-                { label: '인접 픽셀 관계', val: '상하좌우 유지' }
+                { label: '데이터 형태', val: '4 × 4 (2D)' },
+                { label: '총 픽셀 수', val: '16개' },
+                { label: '위치 정보', val: '✅ (행, 열) 보존' }
               ]);
-              document.getElementById('flat-explain').textContent = '2차원 격자 구조에서는 가로, 세로의 물리적인 거리와 공간 패턴(예: 눈 코 입의 상대적 위치)이 온전히 유지됩니다. 주황색으로 표시된 두 픽셀은 가로로 서로 붙어 있는 인접 픽셀임을 직관적으로 알 수 있습니다.';
-            }
+              document.getElementById('flat-formula').innerHTML = `<div class="formula">이미지 형태: (H, W) = (4, 4)<br>각 픽셀 위치: (행 r, 열 c) 명확히 구분<br><br>밝은 부분(좌상)과 어두운 부분(우상)이 공간적으로 인접</div>`;
+            },
+            explain: '2D 이미지에서는 각 픽셀이 (행, 열) 좌표를 가집니다. 인접한 픽셀끼리 "이웃"이 명확하고, 위쪽과 아래쪽, 좌측과 우측이라는 공간 관계가 유지됩니다. 사람 얼굴에서 눈이 코 위에 있다는 것처럼요.'
           },
           {
-            label: '2단계 — 1D Vector로 Flatten',
+            label: '2단계 — Flatten 과정',
             render() {
-              const arr = [0,255,255,0,255,0,0,255,255,255,255,255,255,0,0,255];
-              let h = '<div style="margin-bottom:10px; font-weight:500; font-size:13px;">1열로 길게 펼쳐진 1D 벡터</div><div class="flat-row">';
-              arr.forEach((v, i) => {
-                const isEye = (i===5 || i===6);
-                const bg = `rgba(83,74,183, ${v/255})`;
-                const color = v > 128 ? '#fff' : '#1a1a1a';
-                h += `<div class="flat-cell ${isEye?'pixel-highlight':''}" style="background:${bg}; color:${color}; ${isEye?'outline: 2px solid var(--coral);':''}">${v}</div>`;
-              });
-              h += '</div>';
-              document.getElementById('flat-visual').innerHTML = h;
+              document.getElementById('flat-visual').innerHTML = render2D([[0,0],[0,1],[0,2],[0,3]]) + renderFlat();
               renderStats('flat-stats', [
-                { label: '구조', val: '1D Vector (16)' },
-                { label: '인접 픽셀 관계', val: '상하 구조 파괴' }
+                { label: '변환 방식', val: '행 우선(row-major)' },
+                { label: '출력 형태', val: '(16,) 1D' },
+                { label: '위치 정보', val: '⚠️ index만 남음' }
               ]);
-              document.getElementById('flat-explain').textContent = 'Flatten을 거쳐 1차원 벡터로 일렬 변환되면, 기존 격자상에서 상하로 인접해 있던 픽셀들이 완전히 먼 인덱스로 찢어지게 됩니다. 전결합층(Fully Connected)에 전달하기 위해 필수적이지만 공간 특징이 파괴되므로, 이를 보완하고자 결합 전 단계에 Convolution 레이어를 주로 배치합니다.';
-            }
+              document.getElementById('flat-formula').innerHTML = `<div class="formula">Flatten: (4, 4) → (16,)<br><br>행 0: [220,220,10,10] → index [0,1,2,3]<br>행 1: [220,220,10,10] → index [4,5,6,7]<br>행 2: [10,10,200,200] → index [8,9,10,11]<br>행 3: [10,10,200,200] → index [12,13,14,15]</div>`;
+            },
+            explain: 'Flatten은 2D 배열을 행 순서대로 이어 붙여 1D 벡터로 만듭니다. 값은 그대로 보존되지만, 이제 각 픽셀은 위치 좌표(행,열) 대신 단순 인덱스(0~15)만 가집니다. 원래 "이웃"이었던 픽셀들이 1D 벡터에서는 멀리 떨어질 수 있습니다.'
+          },
+          {
+            label: '3단계 — 위치 정보 손실',
+            render() {
+              const flat = IMG.flat();
+              const idx8 = 8;
+              const row = Math.floor(idx8 / 4), col = idx8 % 4;
+              document.getElementById('flat-visual').innerHTML = render2D([[row, col]]) + renderFlat(idx8);
+              renderStats('flat-stats', [
+                { label: 'index=8의 원래 위치', val: `(행${row}, 열${col})` },
+                { label: '1D 이웃 (index 7, 9)', val: `${flat[7]}, ${flat[9]}` },
+                { label: '실제 2D 이웃', val: `위: ${IMG[row-1]?.[col] ?? '없음'}, 아래: ${IMG[row+1]?.[col]}` }
+              ]);
+              document.getElementById('flat-formula').innerHTML = `<div class="formula">index=8 → 원래 (행2, 열0)<br><br>1D에서 index 7 (이웃) = 행1 열3 → 완전히 다른 위치!<br>2D에서 진짜 위 이웃 = (행1, 열0) = index 4<br><br>→ 1D 이웃 ≠ 2D 공간 이웃</div>`;
+            },
+            explain: 'Flatten 후 index=8 옆의 7은 1D 벡터에서는 바로 이웃이지만, 원래 이미지에서는 다른 행의 끝 픽셀입니다. 진짜 공간적 이웃(위)은 index=4에 있지만 1D에서는 4칸이나 떨어져 있습니다. Neural Network는 이 차이를 알 수 없습니다.'
+          },
+          {
+            label: '4단계 — CNN의 해결책',
+            render() {
+              document.getElementById('flat-visual').innerHTML = `
+                <div style="margin:12px 0">
+                  <div style="font-size:12px;color:var(--text2);margin-bottom:8px;">Flatten (NN) vs Convolution (CNN)</div>
+                  <div class="compare-row">
+                    <div class="compare-card a">
+                      <div class="compare-title">일반 Neural Network</div>
+                      <div class="compare-val">Flatten</div>
+                      <div class="compare-desc">모든 픽셀을 1D로 → 공간 관계 소멸<br>파라미터: 16 × 노드 수</div>
+                    </div>
+                    <div class="compare-card b">
+                      <div class="compare-title">CNN (Convolutional NN)</div>
+                      <div class="compare-val">Conv2D</div>
+                      <div class="compare-desc">3×3 필터가 2D를 그대로 슬라이딩<br>공간 이웃 관계 보존 ✅</div>
+                    </div>
+                  </div>
+                </div>`;
+              renderStats('flat-stats', [
+                { label: 'CNN 파라미터', val: '3×3×1 = 9개' },
+                { label: 'NN 파라미터 (→64)', val: '16×64 = 1,024개' },
+                { label: '공간 정보 보존', val: 'CNN ✅ / NN ❌' }
+              ]);
+              document.getElementById('flat-formula').innerHTML = `<div class="formula">CNN: 필터(3×3)가 이미지 위를 슬라이딩<br>→ 항상 공간적으로 인접한 픽셀끼리만 연산<br><br>덕분에 엣지, 텍스처, 패턴을 위치 정보와 함께 학습</div>`;
+            },
+            explain: 'CNN은 Flatten 없이 2D 구조를 유지한 채 3×3 필터로 이미지를 훑습니다. 필터는 항상 공간적으로 인접한 픽셀들만 봄으로써 "왼쪽에 무엇이 있고, 위에 무엇이 있다"는 위치 관계를 유지합니다. 이것이 CNN이 이미지 인식에 강한 핵심 이유입니다.'
           }
         ];
 
-        function setFlatTab(i) {
-          flatTab = i;
-          document.getElementById('flat-tabs').querySelectorAll('.tab-btn').forEach((b, j) => b.classList.toggle('active', j === i));
-          FLATTABS[i].render();
-        }
         const flatTabRow = document.getElementById('flat-tabs');
         FLATTABS.forEach((t, i) => {
           const b = document.createElement('button');
@@ -836,350 +936,305 @@
           b.onclick = () => setFlatTab(i);
           flatTabRow.appendChild(b);
         });
+
+        function setFlatTab(i) {
+          flatTab = i;
+          flatTabRow.querySelectorAll('.tab-btn').forEach((b, j) => b.classList.toggle('active', j === i));
+          FLATTABS[i].render();
+          document.getElementById('flat-explain').textContent = FLATTABS[i].explain;
+        }
         setFlatTab(0);
       }
 
       // ===================== OVERFIT =====================
       if (param === 'overfit') {
-        const chart = mkChart('overfit-chart', 1, 10, 0, 10, '모델 복잡도 (용량)', '오차 (Loss)');
+        const chart = mkChart('overfit-chart', 0, 50, 0, 3, '에폭(Epoch)', '손실(Loss)');
+        let overfitTab = 0;
+
+        function genCurves(complexity) {
+          const trainPts = [], valPts = [];
+          const underfit = complexity <= 3;
+          const overfit = complexity >= 7;
+          for (let e = 0; e <= 50; e++) {
+            let train, val;
+            if (underfit) {
+              train = 1.5 * Math.exp(-0.03 * e) + 0.8;
+              val   = 1.6 * Math.exp(-0.025 * e) + 0.85;
+            } else if (overfit) {
+              train = 2.5 * Math.exp(-0.12 * e) + 0.03;
+              val   = 2.0 * Math.exp(-0.06 * e) + 0.3 + (e > 20 ? (e - 20) * 0.025 : 0);
+            } else {
+              train = 2.2 * Math.exp(-0.09 * e) + 0.1;
+              val   = 2.2 * Math.exp(-0.075 * e) + 0.2 + (e > 35 ? (e - 35) * 0.005 : 0);
+            }
+            trainPts.push({ x: e, y: parseFloat(Math.min(3, train).toFixed(3)) });
+            valPts.push({ x: e, y: parseFloat(Math.min(3, val).toFixed(3)) });
+          }
+          return { trainPts, valPts };
+        }
 
         const OVERFITTABS = [
           {
-            label: '개념 그래프 확인',
+            label: '1단계 — 과소적합',
+            slider: false,
+            complexity: 2,
             render() {
               if (!chart) return;
-              chart.options.scales.x.title.text = '모델 복잡도';
-              const cx = parseInt(document.getElementById('overfit-complexity').value);
-              
-              const tPts = [], vPts = [];
-              for (let x = 1; x <= 10; x += 0.2) {
-                const t = 9 * Math.exp(-0.4 * x) + 0.3;
-                const v = 8 * Math.exp(-0.4 * x) + 0.5 + 0.05 * Math.pow(x - 4.5, 2) * (x > 4.5 ? 1.5 : 0.4);
-                tPts.push({ x: x, y: t });
-                vPts.push({ x: x, y: v });
-              }
-              
-              const curT = 9 * Math.exp(-0.4 * cx) + 0.3;
-              const curV = 8 * Math.exp(-0.4 * cx) + 0.5 + 0.05 * Math.pow(cx - 4.5, 2) * (cx > 4.5 ? 1.5 : 0.4);
-
+              const { trainPts, valPts } = genCurves(2);
               chart.data.datasets = [
-                lineDS(tPts, PURPLE, [], 2.5),
-                lineDS(vPts, CORAL, [], 2.5),
-                dotDS([{ x: cx, y: curT }], PURPLE, 7),
-                dotDS([{ x: cx, y: curV }], CORAL, 7)
+                lineDS(trainPts, PURPLE, [], 2.5),
+                lineDS(valPts, CORAL, [5, 4], 2)
               ];
               chart.update();
-
-              let status = '적정 수준 (Optimal)';
-              let badge = 'badge-green';
-              if (cx <= 3) { status = '과소적합 (Underfitting)'; badge = 'badge-blue'; }
-              else if (cx >= 7) { status = '과적합 (Overfitting)'; badge = 'badge-red'; }
-
               renderStats('overfit-stats', [
-                { label: 'Train Error', val: curT.toFixed(2) },
-                { label: 'Val Error', val: curV.toFixed(2) },
-                { label: '현재 상태', val: `<span class="badge ${badge}">${status}</span>` }
+                { label: 'Train Loss (50ep)', val: trainPts[50].y.toFixed(2) },
+                { label: 'Val Loss (50ep)', val: valPts[50].y.toFixed(2) },
+                { label: '진단', val: '⚠️ 과소적합' }
               ]);
-            }
+              document.getElementById('overfit-formula').innerHTML = `<div class="formula"><span class="hl-p">━━</span> Train Loss &nbsp;<span class="hl-c">╌╌╌</span> Val Loss<br><br>Train/Val 모두 높음 → 모델이 너무 단순해서<br>데이터의 패턴을 충분히 학습하지 못함 (High Bias)</div>`;
+            },
+            explain: '과소적합(Underfitting)은 모델이 너무 단순해서 훈련 데이터조차 잘 맞추지 못하는 상태입니다. Train Loss와 Val Loss가 모두 높습니다. 레이어 수를 늘리거나, 더 복잡한 모델을 사용하거나, 더 오래 학습해야 합니다.'
+          },
+          {
+            label: '2단계 — 적절한 적합',
+            slider: false,
+            complexity: 5,
+            render() {
+              if (!chart) return;
+              const { trainPts, valPts } = genCurves(5);
+              chart.data.datasets = [
+                lineDS(trainPts, PURPLE, [], 2.5),
+                lineDS(valPts, CORAL, [5, 4], 2)
+              ];
+              chart.update();
+              renderStats('overfit-stats', [
+                { label: 'Train Loss (50ep)', val: trainPts[50].y.toFixed(2) },
+                { label: 'Val Loss (50ep)', val: valPts[50].y.toFixed(2) },
+                { label: '진단', val: '✅ 적절한 학습' }
+              ]);
+              document.getElementById('overfit-formula').innerHTML = `<div class="formula"><span class="hl-p">━━</span> Train Loss &nbsp;<span class="hl-c">╌╌╌</span> Val Loss<br><br>Train/Val 모두 낮고 격차도 작음<br>→ 새로운 데이터에도 잘 일반화됨 ✅</div>`;
+            },
+            explain: '적절히 학습된 모델은 훈련 데이터와 검증 데이터 모두에서 낮은 손실을 보입니다. Train Loss와 Val Loss의 격차가 크지 않고, 둘 다 낮은 수렴 상태가 이상적입니다. 새로운 데이터에도 잘 일반화됩니다.'
+          },
+          {
+            label: '3단계 — 과적합',
+            slider: false,
+            complexity: 9,
+            render() {
+              if (!chart) return;
+              const { trainPts, valPts } = genCurves(9);
+              chart.data.datasets = [
+                lineDS(trainPts, PURPLE, [], 2.5),
+                lineDS(valPts, CORAL, [5, 4], 2)
+              ];
+              chart.update();
+              renderStats('overfit-stats', [
+                { label: 'Train Loss (50ep)', val: trainPts[50].y.toFixed(2) },
+                { label: 'Val Loss (50ep)', val: valPts[50].y.toFixed(2) },
+                { label: '진단', val: '❌ 과적합' }
+              ]);
+              document.getElementById('overfit-formula').innerHTML = `<div class="formula"><span class="hl-p">━━</span> Train Loss &nbsp;<span class="hl-c">╌╌╌</span> Val Loss<br><br>Train Loss ↓ 낮은데 Val Loss ↑ 높아짐<br>→ 훈련 데이터만 외움 (High Variance)<br>해결: Dropout, 정규화, 데이터 증강</div>`;
+            },
+            explain: '과적합(Overfitting)은 모델이 훈련 데이터를 외워버린 상태입니다. Train Loss는 매우 낮지만 Val Loss는 오히려 올라갑니다. 해결책으로는 Dropout, L2 정규화, 데이터 증강(Data Augmentation), 조기 종료(Early Stopping) 등이 있습니다.'
+          },
+          {
+            label: '4단계 — 복잡도 조절',
+            slider: true,
+            render() {
+              if (!chart) return;
+              const c = parseInt(document.getElementById('overfit-complexity').value);
+              const { trainPts, valPts } = genCurves(c);
+              chart.data.datasets = [
+                lineDS(trainPts, PURPLE, [], 2.5),
+                lineDS(valPts, CORAL, [5, 4], 2)
+              ];
+              chart.update();
+              const gap = Math.abs(valPts[50].y - trainPts[50].y);
+              const status = c <= 3 ? '⚠️ 과소적합' : c >= 7 ? '❌ 과적합' : '✅ 적절';
+              renderStats('overfit-stats', [
+                { label: '모델 복잡도', val: c + ' / 10' },
+                { label: 'Train↔Val 격차', val: gap.toFixed(2) },
+                { label: '상태', val: status }
+              ]);
+              document.getElementById('overfit-formula').innerHTML = `<div class="formula">복잡도 ${c}: ${c <= 3 ? 'High Bias (과소적합) — 레이어/뉴런 수 증가 필요' : c >= 7 ? 'High Variance (과적합) — 정규화/Dropout 필요' : '적절한 균형 — 편향-분산 트레이드오프 최적'}</div>`;
+              document.getElementById('overfit-explain').textContent = c <= 3 ? '모델이 너무 단순합니다. 복잡도를 높여보세요.' : c >= 7 ? '모델이 너무 복잡합니다. 정규화 기법을 적용하거나 복잡도를 낮추세요.' : '적절한 복잡도입니다. Train/Val Loss 격차가 작고 둘 다 낮습니다.';
+            },
+            explain: '슬라이더로 모델 복잡도를 조절하면서 Train/Val Loss 변화를 관찰하세요. 복잡도가 너무 낮으면 과소적합, 너무 높으면 과적합이 발생합니다.'
           }
         ];
 
-        document.getElementById('overfit-complexity').addEventListener('input', function() {
-          document.getElementById('overfit-complexity-label').textContent = this.value;
-          OVERFITTABS[0].render();
+        const overfitTabRow = document.getElementById('overfit-tabs');
+        OVERFITTABS.forEach((t, i) => {
+          const b = document.createElement('button');
+          b.className = 'tab-btn' + (i === 0 ? ' active' : '');
+          b.textContent = t.label;
+          b.onclick = () => setOverfitTab(i);
+          overfitTabRow.appendChild(b);
         });
 
-        const overfitTabRow = document.getElementById('overfit-tabs');
-        const b = document.createElement('button');
-        b.className = 'tab-btn active';
-        b.textContent = OVERFITTABS[0].label;
-        overfitTabRow.appendChild(b);
-        document.getElementById('overfit-slider-area').style.display = 'block';
-        
-        document.getElementById('overfit-formula').innerHTML = `<div class="formula"><span class="hl-p">━━</span> Train Loss &nbsp;&nbsp; <span class="hl-c">━━</span> Validation Loss<br><br>복잡도가 너무 크면 대조군 오차가 치솟고, 낮으면 둘 다 높은 값을 갖습니다.</div>`;
-        document.getElementById('overfit-explain').textContent = '모델의 뉴런 수나 파라미터 개수가 너무 많아지면(우측), 학습 데이터는 완벽히 외우지만 새로운 검증 데이터(Val Loss)에서는 유연성을 잃고 튕겨버립니다. 반면 너무 단순하면(좌측) 양쪽 모두 학습하지 못합니다. Val Loss가 최저점을 찍는 지점을 잡는 것이 목표입니다.';
-        
-        OVERFITTABS[0].render();
+        function setOverfitTab(i) {
+          overfitTab = i;
+          overfitTabRow.querySelectorAll('.tab-btn').forEach((b, j) => b.classList.toggle('active', j === i));
+          const t = OVERFITTABS[i];
+          document.getElementById('overfit-slider-area').style.display = t.slider ? 'block' : 'none';
+          t.render();
+          if (!t.slider) document.getElementById('overfit-explain').textContent = t.explain;
+        }
+
+        document.getElementById('overfit-complexity').addEventListener('input', function () {
+          document.getElementById('overfit-complexity-label').textContent = this.value;
+          if (overfitTab === 3) OVERFITTABS[3].render();
+        });
+        setOverfitTab(0);
       }
 
-      // ===================== CONVOLUTION & SIMULATOR =====================
+      // ===================== CONVOLUTION =====================
       if (param === 'convolution') {
-        const chart = mkChart('conv-chart', 0, 10, 0, 10, '', '');
+        const chart = mkChart('conv-chart', 0, 17, 0, 17, '입력 크기', '출력 크기');
+        let convTab = 0;
+
+        function outSize(n, f, s, p) { return Math.floor((n + 2 * p - f) / s) + 1; }
 
         const CONVTABS = [
           {
-            label: '크기 계산 시뮬레이터',
+            label: '1단계 — 기본 연산',
+            slider: false,
             render() {
+              if (!chart) return;
+              const pts = [];
+              for (let n = 3; n <= 16; n++) pts.push({ x: n, y: outSize(n, 3, 1, 0) });
+              chart.data.datasets = [
+                lineDS(pts, PURPLE, [], 2.5),
+                lineDS([{ x: 0, y: 0 }, { x: 16, y: 16 }], isDark ? 'rgba(255,255,255,0.15)' : 'rgba(0,0,0,0.12)', [4, 3], 1),
+                dotDS([{ x: 8, y: outSize(8, 3, 1, 0) }], CORAL, 9)
+              ];
+              chart.update();
+              renderStats('conv-stats', [
+                { label: '필터 크기', val: '3×3' },
+                { label: '입력 8×8 → 출력', val: outSize(8, 3, 1, 0) + '×' + outSize(8, 3, 1, 0) },
+                { label: '출력 공식', val: '(n - f + 1)' }
+              ]);
+              document.getElementById('conv-formula').innerHTML = `<div class="formula">출력 크기 = (n − f + 1)<br>= (8 − 3 + 1) = <span class="hl-p">6</span><br><br>3×3 필터는 경계에서 적용 불가 → 출력이 작아짐</div>`;
+            },
+            explain: '기본 Convolution(stride=1, padding=0)에서 3×3 필터를 8×8 이미지에 적용하면 6×6 출력이 나옵니다. 필터가 이미지 끝까지 슬라이딩할 때 경계 픽셀은 중심이 될 수 없어 출력 크기가 줄어듭니다.'
+          },
+          {
+            label: '2단계 — Stride 효과',
+            slider: false,
+            render() {
+              if (!chart) return;
+              const s1 = [], s2 = [], s3 = [];
+              for (let n = 3; n <= 16; n++) {
+                if (outSize(n, 3, 1, 0) > 0) s1.push({ x: n, y: outSize(n, 3, 1, 0) });
+                if (outSize(n, 3, 2, 0) > 0) s2.push({ x: n, y: outSize(n, 3, 2, 0) });
+                if (outSize(n, 3, 3, 0) > 0) s3.push({ x: n, y: outSize(n, 3, 3, 0) });
+              }
+              chart.data.datasets = [
+                lineDS(s1, PURPLE, [], 2.5),
+                lineDS(s2, TEAL, [5, 4], 2),
+                lineDS(s3, CORAL, [2, 3], 2)
+              ];
+              chart.update();
+              renderStats('conv-stats', [
+                { label: 'stride=1 (8×8 입력)', val: outSize(8, 3, 1, 0) + '×' + outSize(8, 3, 1, 0) },
+                { label: 'stride=2', val: outSize(8, 3, 2, 0) + '×' + outSize(8, 3, 2, 0) },
+                { label: 'stride=3', val: outSize(8, 3, 3, 0) + '×' + outSize(8, 3, 3, 0) }
+              ]);
+              document.getElementById('conv-formula').innerHTML = `<div class="formula">출력 크기 = ⌊(n − f) / s⌋ + 1<br><br><span class="hl-p">━━</span> stride=1: ⌊(8−3)/1⌋+1 = 6<br><span class="hl-t">╌╌╌</span> stride=2: ⌊(8−3)/2⌋+1 = 3<br><span class="hl-c">···</span> stride=3: ⌊(8−3)/3⌋+1 = 2</div>`;
+            },
+            explain: 'Stride는 필터를 한 번에 몇 칸씩 이동할지를 결정합니다. Stride=2이면 출력 크기가 절반으로 줄어, 공간 해상도를 낮추는 동시에 계산량도 줄입니다. MaxPooling 대신 stride=2 Convolution으로 다운샘플링하기도 합니다.'
+          },
+          {
+            label: '3단계 — Padding 효과',
+            slider: false,
+            render() {
+              if (!chart) return;
+              const p0 = [], p1 = [], p2 = [];
+              for (let n = 3; n <= 16; n++) {
+                p0.push({ x: n, y: outSize(n, 3, 1, 0) });
+                p1.push({ x: n, y: outSize(n, 3, 1, 1) });
+                p2.push({ x: n, y: outSize(n, 3, 1, 2) });
+              }
+              chart.data.datasets = [
+                lineDS(p0, CORAL, [2, 3], 2),
+                lineDS(p1, PURPLE, [], 2.5),
+                lineDS(p2, TEAL, [5, 4], 2),
+                lineDS([{ x: 0, y: 0 }, { x: 16, y: 16 }], isDark ? 'rgba(255,255,255,0.15)' : 'rgba(0,0,0,0.12)', [4, 3], 1)
+              ];
+              chart.update();
+              renderStats('conv-stats', [
+                { label: 'padding=0 (8×8)', val: outSize(8, 3, 1, 0) + '×' + outSize(8, 3, 1, 0) },
+                { label: 'padding=1 ("same")', val: outSize(8, 3, 1, 1) + '×' + outSize(8, 3, 1, 1) },
+                { label: 'padding=2', val: outSize(8, 3, 1, 2) + '×' + outSize(8, 3, 1, 2) }
+              ]);
+              document.getElementById('conv-formula').innerHTML = `<div class="formula">출력 크기 = ⌊(n + 2p − f) / s⌋ + 1<br><br><span class="hl-c">···</span> p=0: (8+0−3)/1+1 = 6  ← 크기 줄어듦<br><span class="hl-p">━━</span> p=1: (8+2−3)/1+1 = 8  ← 크기 유지 ("Same")<br><span class="hl-t">╌╌╌</span> p=2: (8+4−3)/1+1 = 10 ← 크기 증가</div>`;
+            },
+            explain: 'Padding은 이미지 경계에 0을 추가해 출력 크기를 조절합니다. padding=1이면 3×3 필터에서 입출력 크기가 같아지는 "Same" 패딩이 됩니다. 깊은 네트워크에서 크기를 유지하고 싶을 때 자주 사용합니다.'
+          },
+          {
+            label: '4단계 — 직접 설정',
+            slider: true,
+            render() {
+              if (!chart) return;
               const n = parseInt(document.getElementById('conv-n').value);
               const f = parseInt(document.getElementById('conv-f').value);
               const s = parseInt(document.getElementById('conv-s').value);
               const p = parseInt(document.getElementById('conv-p').value);
-
-              const outVal = (n + 2 * p - f) / s + 1;
-              const isValid = Number.isInteger(outVal) && outVal > 0;
-              const out = isValid ? outVal : Math.floor(outVal);
-
-              renderStats('conv-stats', [
-                { label: '입력 크기 (n)', val: `${n}×${n}` },
-                { label: '출력 크기 (Output)', val: isValid ? `✅ ${out}×${out}` : `❌ 비정상 (${outVal.toFixed(2)})` }
-              ]);
-
-              document.getElementById('conv-formula').innerHTML = `
-                <div class="formula">
-                  출력 크기 계산 공식:<br>
-                  Output = ⌊ (n + 2p − f) / s ⌋ + 1<br>
-                  ⌊ (${n} + 2(${p}) − ${f}) / ${s} ⌋ + 1 = <span class="hl-p">${out}</span>
-                </div>`;
-              
-              if (chart) {
-                chart.options.scales.x.display = false;
-                chart.options.scales.y.display = false;
-                const inBox = [{x:0,y:0},{x:n,y:0},{x:n,y:n},{x:0,y:n},{x:0,y:0}];
-                const outBox = [{x:12,y:0},{x:12+out,y:0},{x:12+out,y:out},{x:12,y:out},{x:12,y:0}];
-                chart.data.datasets = [
-                  lineDS(inBox, TEAL, [], 2.5),
-                  lineDS(outBox, PURPLE, [], 2.5)
-                ];
-                chart.update();
+              const out = outSize(n, f, s, p);
+              const valid = out > 0;
+              const pts = [];
+              for (let nn = f; nn <= 16; nn++) {
+                const o = outSize(nn, f, s, p);
+                if (o > 0) pts.push({ x: nn, y: o });
               }
-              document.getElementById('conv-explain').textContent = isValid ? `정상 연산 가능: ${n}x${n} 행렬에 ${f}x${f} 필터를 stride=${s}, padding=${p}로 적용 시 ${out}x${out} 맵이 추출됩니다.` : '유효하지 않은 조건입니다. Stride 배수 혹은 패딩 크기를 재조절해 나누어 떨어지게 맞추어 주세요.';
-            }
+              chart.data.datasets = [
+                lineDS(pts, PURPLE, [], 2.5),
+                lineDS([{ x: 0, y: 0 }, { x: 16, y: 16 }], isDark ? 'rgba(255,255,255,0.12)' : 'rgba(0,0,0,0.1)', [4, 3], 1),
+                ...(valid ? [dotDS([{ x: n, y: out }], CORAL, 9)] : [])
+              ];
+              chart.update();
+              renderStats('conv-stats', [
+                { label: '입력 크기', val: n + '×' + n },
+                { label: '출력 크기', val: valid ? out + '×' + out : '❌ 불가' },
+                { label: '파라미터 수', val: (f * f) + '개 (편향 제외)' }
+              ]);
+              document.getElementById('conv-formula').innerHTML = `<div class="formula">출력 = ⌊(${n} + 2×${p} − ${f}) / ${s}⌋ + 1 = <span class="${valid ? 'hl-p' : 'hl-c'}">${valid ? out : '유효하지 않음'}</span><br><br>필터(${f}×${f}), stride=${s}, padding=${p}</div>`;
+              document.getElementById('conv-explain').textContent = valid ? `${n}×${n} 입력에 ${f}×${f} 필터를 stride=${s}, padding=${p}로 적용하면 ${out}×${out} Feature Map이 나옵니다.` : '현재 설정으로는 유효한 출력이 나오지 않습니다. 입력 크기를 늘리거나 필터 크기·stride를 줄여보세요.';
+            },
+            explain: '슬라이더로 입력 크기, 필터 크기, Stride, Padding을 조절하면서 출력 크기 변화를 확인하세요.'
           }
         ];
-
-        // 이벤트 리스너 등록
-        ['conv-n', 'conv-f', 'conv-s', 'conv-p'].forEach(id => {
-          document.getElementById(id).addEventListener('input', function() {
-            document.getElementById(id + '-v').textContent = this.value;
-            CONVTABS[0].render();
-          });
-        });
 
         const convTabRow = document.getElementById('conv-tabs');
-        const b = document.createElement('button');
-        b.className = 'tab-btn active';
-        b.textContent = CONVTABS[0].label;
-        convTabRow.appendChild(b);
-        document.getElementById('conv-slider-area').style.display = 'block';
-        CONVTABS[0].render();
+        CONVTABS.forEach((t, i) => {
+          const b = document.createElement('button');
+          b.className = 'tab-btn' + (i === 0 ? ' active' : '');
+          b.textContent = t.label;
+          b.onclick = () => setConvTab(i);
+          convTabRow.appendChild(b);
+        });
 
-        // -------------------------------------------------------------
-        // 필터 인터랙티브 에지 검출 엔진
-        // -------------------------------------------------------------
-        const inputImage = [
-          [255, 255, 255, 0, 0, 0],
-          [255, 255, 255, 0, 0, 0],
-          [255, 255, 255, 0, 0, 0],
-          [255, 255, 255, 0, 0, 0],
-          [255, 255, 255, 0, 0, 0],
-          [255, 255, 255, 0, 0, 0]
-        ];
-
-        const filters = {
-          sobel_x: {
-            name: "Sobel X (수직 에지 검출)",
-            kernel: [[-1, 0, 1], [-2, 0, 2], [-1, 0, 1]],
-            desc: "수직 에지 필터는 가로 방향의 밝기 변화를 감지합니다. 이 예시 이미지는 왼쪽은 밝고(255) 오른쪽은 어두우므로(0) 가운데 수직 경계선 부분에서 강한 양수의 반응(흰색 선)이 나타납니다."
-          },
-          sobel_y: {
-            name: "Sobel Y (수평 에지 검출)",
-            kernel: [[-1, -2, -1], [0, 0, 0], [1, 2, 1]],
-            desc: "수평 에지 필터는 세로 방향의 밝기 변화를 감지합니다. 현재 예시 이미지는 가로축(좌우) 경계선만 존재하고 세로축 변화가 전혀 없으므로 연산 결과가 전부 0(검은색 맵)이 됩니다."
-          },
-          laplacian: {
-            name: "Laplacian (전방향 에지 검출)",
-            kernel: [[0, 1, 0], [1, -4, 1], [0, 1, 0]],
-            desc: "Laplacian 필터는 중앙과 주변 픽셀의 차이 이차도함수를 구하여 방향에 상하좌우 상관없이 모든 경계선을 한 번에 찾아냅니다."
-          },
-          blur: {
-            name: "Blur (평균 스무딩 필터)",
-            kernel: [[1/9, 1/9, 1/9], [1/9, 1/9, 1/9], [1/9, 1/9, 1/9]],
-            desc: "모든 커널 값을 균등하게 두어 픽셀 주변부의 평균을 냅니다. 날카로운 경계선 레이아웃이 뭉개지며 부드러운 스무딩 효과를 냅니다."
-          }
-        };
-
-        let currentFilter = 'sobel_x';
-        let activeR = 1, activeC = 1;
-
-        const cvInput = document.getElementById('c-input');
-        const cvOutput = document.getElementById('c-output');
-        const cvZoom = document.getElementById('c-zoom-input');
-
-        function getOutputMap() {
-          const kernel = filters[currentFilter].kernel;
-          const out = [];
-          for (let r = 1; r <= 4; r++) {
-            const row = [];
-            for (let c = 1; c <= 4; c++) {
-              let sum = 0;
-              for (let i = 0; i < 3; i++) {
-                for (let j = 0; j < 3; j++) {
-                  sum += inputImage[r - 1 + i][c - 1 + j] * kernel[i][j];
-                }
-              }
-              row.push(sum);
-            }
-            out.push(row);
-          }
-          return out;
+        function setConvTab(i) {
+          convTab = i;
+          convTabRow.querySelectorAll('.tab-btn').forEach((b, j) => b.classList.toggle('active', j === i));
+          const t = CONVTABS[i];
+          document.getElementById('conv-slider-area').style.display = t.slider ? 'block' : 'none';
+          t.render();
+          if (!t.slider) document.getElementById('conv-explain').textContent = t.explain;
         }
 
-        function grayColor(val) {
-          return `rgb(${val},${val},${val})`;
-        }
-
-        function renderFilterDOM() {
-          const kDisplay = document.getElementById('kernel-display');
-          const kDisplay2 = document.getElementById('kernel-display2');
-          kDisplay.innerHTML = '';
-          kDisplay2.innerHTML = '';
-          
-          const kernel = filters[currentFilter].kernel;
-          kernel.forEach(row => {
-            row.forEach(v => {
-              const cell = document.createElement('div');
-              const cell2 = document.createElement('div');
-              const roundedV = Number.isInteger(v) ? v : v.toFixed(2);
-              
-              cell.className = 'kernel-cell ' + (v > 0 ? 'k-pos' : v < 0 ? 'k-neg' : 'k-zero');
-              cell.textContent = roundedV;
-              cell2.className = 'kernel-cell ' + (v > 0 ? 'k-pos' : v < 0 ? 'k-neg' : 'k-zero');
-              cell2.textContent = roundedV;
-              
-              kDisplay.appendChild(cell);
-              kDisplay2.appendChild(cell2);
+        ['conv-n', 'conv-f', 'conv-s', 'conv-p'].forEach(id => {
+          const el = document.getElementById(id);
+          if (el) {
+            el.addEventListener('input', function () {
+              document.getElementById(id + '-v').textContent = this.value;
+              if (convTab === 3) CONVTABS[3].render();
             });
-          });
-          document.getElementById('desc-box').textContent = filters[currentFilter].desc;
-        }
-
-        function drawInputCanvas() {
-          const ctx = cvInput.getContext('2d');
-          ctx.clearRect(0, 0, 180, 180);
-          const sz = 30;
-          for (let r = 0; r < 6; r++) {
-            for (let c = 0; c < 6; c++) {
-              ctx.fillStyle = grayColor(inputImage[r][c]);
-              ctx.fillRect(c * sz, r * sz, sz, sz);
-              ctx.strokeStyle = 'rgba(128,128,128,0.2)';
-              ctx.strokeRect(c * sz, r * sz, sz, sz);
-            }
           }
-          ctx.strokeStyle = '#EF9F27';
-          ctx.lineWidth = 3;
-          ctx.strokeRect((activeC - 1) * sz, (activeR - 1) * sz, sz * 3, sz * 3);
-        }
-
-        function drawOutputCanvas() {
-          const ctx = cvOutput.getContext('2d');
-          ctx.clearRect(0, 0, 160, 160);
-          const outMap = getOutputMap();
-          const sz = 40;
-
-          for (let r = 0; r < 4; r++) {
-            for (let c = 0; c < 4; c++) {
-              let val = outMap[r][c];
-              if (currentFilter !== 'blur') {
-                val = Math.min(255, Math.abs(val));
-              }
-              ctx.fillStyle = grayColor(val);
-              ctx.fillRect(c * sz, r * sz, sz, sz);
-              ctx.strokeStyle = 'rgba(128,128,128,0.2)';
-              ctx.strokeRect(c * sz, r * sz, sz, sz);
-
-              if (r === (activeR - 1) && c === (activeC - 1)) {
-                ctx.strokeStyle = '#EF9F27';
-                ctx.lineWidth = 3;
-                ctx.strokeRect(c * sz, r * sz, sz, sz);
-              }
-            }
-          }
-        }
-
-        function drawZoomCanvas() {
-          const ctx = cvZoom.getContext('2d');
-          ctx.clearRect(0, 0, 135, 135);
-          const sz = 45;
-          for (let i = 0; i < 3; i++) {
-            for (let j = 0; j < 3; j++) {
-              const imgR = activeR - 1 + i;
-              const imgC = activeC - 1 + j;
-              ctx.fillStyle = grayColor(inputImage[imgR][imgC]);
-              ctx.fillRect(j * sz, i * sz, sz, sz);
-              
-              ctx.strokeStyle = 'rgba(128,128,128,0.3)';
-              ctx.strokeRect(j * sz, i * sz, sz, sz);
-              
-              ctx.fillStyle = inputImage[imgR][imgC] > 128 ? 'rgba(0,0,0,0.7)' : 'rgba(255,255,255,0.9)';
-              ctx.font = 'bold 12px monospace';
-              ctx.textAlign = 'center';
-              ctx.textBaseline = 'middle';
-              ctx.fillText(inputImage[imgR][imgC], j * sz + sz / 2, i * sz + sz / 2);
-            }
-          }
-        }
-
-        function renderCalculationText() {
-          const kernel = filters[currentFilter].kernel;
-          const el = document.getElementById('calc-display');
-          let parts = [];
-          let sum = 0;
-          for (let i = 0; i < 3; i++) {
-            for (let j = 0; j < 3; j++) {
-              const imgR = activeR - 1 + i;
-              const imgC = activeC - 1 + j;
-              const pv = inputImage[imgR][imgC];
-              const kv = kernel[i][j];
-              const prod = pv * kv;
-              sum += prod;
-              if (kv !== 0) {
-                const isPos = kv > 0;
-                parts.push(`<span style="color:${isPos ? 'var(--teal)' : 'var(--coral)'}">(${pv}×${Number.isInteger(kv)?kv:kv.toFixed(2)})</span>`);
-              }
-            }
-          }
-          el.innerHTML = parts.join('<br>+ ') + `<br><br>= <strong>${Number.isInteger(sum)?sum:sum.toFixed(1)}</strong>`;
-        }
-
-        function updateSim() {
-          renderFilterDOM();
-          drawInputCanvas();
-          drawOutputCanvas();
-          drawZoomCanvas();
-          renderCalculationText();
-        }
-
-        ['sobel_x', 'sobel_y', 'laplacian', 'blur'].forEach(fKey => {
-          document.getElementById('btn-' + fKey).addEventListener('click', function() {
-            document.querySelectorAll('.sim-btn').forEach(b => b.classList.remove('active'));
-            this.classList.add('active');
-            currentFilter = fKey;
-            updateSim();
-          });
         });
-
-        cvInput.addEventListener('click', function(e) {
-          const rect = cvInput.getBoundingClientRect();
-          const cx = e.clientX - rect.left;
-          const cy = e.clientY - rect.top;
-          const c = Math.floor(cx / 30) + 1;
-          const r = Math.floor(cy / 30) + 1;
-          activeC = Math.max(1, Math.min(4, c));
-          activeR = Math.max(1, Math.min(4, r));
-          updateSim();
-        });
-
-        cvOutput.addEventListener('click', function(e) {
-          const rect = cvOutput.getBoundingClientRect();
-          const cx = e.clientX - rect.left;
-          const cy = e.clientY - rect.top;
-          activeC = Math.floor(cx / 40) + 1;
-          activeR = Math.floor(cy / 40) + 1;
-          updateSim();
-        });
-
-        updateSim();
+        setConvTab(0);
       }
+
     });
   </script>
 </body>
