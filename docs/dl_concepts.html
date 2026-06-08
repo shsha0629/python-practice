@@ -260,6 +260,11 @@
         <div class="menu-card-desc">Sobel · Laplacian · Blur 필터 비교, 계산 과정 시각화</div>
         <div class="menu-card-url">#filter</div>
       </a>
+      <a class="menu-card" href="#pooling">
+        <div class="menu-card-title">MaxPooling vs AvgPooling</div>
+        <div class="menu-card-desc">윈도우별 최댓값·평균값 선택, stride·크기 조절, 두 방식 비교</div>
+        <div class="menu-card-url">#pooling</div>
+      </a>
     </div>
   </div>
  
@@ -392,6 +397,17 @@
     <div id="filter-main-visual"></div>
     <div id="filter-formula"></div>
     <div class="explain-box" id="filter-explain"></div>
+  </div>
+ 
+  <!-- POOLING -->
+  <div id="page-pooling" class="graph-section">
+    <h2>MaxPooling vs AveragePooling</h2>
+    <p class="subtitle">단계별로 Pooling의 원리와 두 방식의 차이를 확인하세요</p>
+    <div class="tab-row" id="pool-tabs"></div>
+    <div id="pool-visual"></div>
+    <div class="stat-row" id="pool-stats"></div>
+    <div id="pool-formula"></div>
+    <div class="explain-box" id="pool-explain"></div>
   </div>
  
   <script>
@@ -1521,7 +1537,404 @@
         renderFilter();
       }
  
+      // ===================== POOLING =====================
+      if (param === 'pooling') {
+ 
+        const POOL_INPUT = [
+          [12, 20,  8, 16,  3, 11],
+          [ 5, 30,  2, 24, 14,  6],
+          [18,  7, 25,  9, 21, 13],
+          [ 4, 22,  1, 28,  6, 17],
+          [10, 15, 19,  3, 26,  8],
+          [ 2, 11, 16, 23,  5, 29],
+        ];
+ 
+        // color scale: low=bluish, high=coral
+        function poolCellColor(v, mn, mx) {
+          const t = mn === mx ? 0.5 : (v - mn) / (mx - mn);
+          if (isDark) {
+            const r = Math.round(30  + t * 180);
+            const g = Math.round(60  + t * 60);
+            const b = Math.round(120 - t * 60);
+            return `rgb(${r},${g},${b})`;
+          } else {
+            const r = Math.round(210 + t * 45);
+            const g = Math.round(225 - t * 100);
+            const b = Math.round(245 - t * 155);
+            return `rgb(${r},${g},${b})`;
+          }
+        }
+        function poolFg(v, mn, mx) {
+          const t = mn === mx ? 0.5 : (v - mn) / (mx - mn);
+          return t > 0.55 ? (isDark ? '#fff' : '#1a1a1a') : (isDark ? '#ccc' : '#333');
+        }
+ 
+        function applyPool(img, poolSize, stride, mode) {
+          const inH = img.length, inW = img[0].length;
+          const outH = Math.floor((inH - poolSize) / stride) + 1;
+          const outW = Math.floor((inW - poolSize) / stride) + 1;
+          const out = [], windows = [];
+          for (let r = 0; r < outH; r++) {
+            const row = [], wrow = [];
+            for (let c = 0; c < outW; c++) {
+              const patch = [];
+              for (let i = 0; i < poolSize; i++)
+                for (let j = 0; j < poolSize; j++)
+                  patch.push(img[r * stride + i][c * stride + j]);
+              const val = mode === 'max'
+                ? Math.max(...patch)
+                : Math.round(patch.reduce((a,b) => a+b, 0) / patch.length);
+              row.push(val);
+              wrow.push(patch);
+            }
+            out.push(row);
+            windows.push(wrow);
+          }
+          return { out, windows };
+        }
+ 
+        function gridHTML(mat, highlight, poolSize, stride, cellSize) {
+          const sz = cellSize || 38;
+          const rows = mat.length, cols = mat[0].length;
+          const flat = mat.flat();
+          const mn = Math.min(...flat), mx = Math.max(...flat);
+ 
+          // build highlight set: which input cells belong to window [hr][hc]
+          const hlSet = new Set();
+          if (highlight && poolSize && stride !== undefined) {
+            const [hr, hc] = highlight;
+            for (let i = 0; i < poolSize; i++)
+              for (let j = 0; j < poolSize; j++)
+                hlSet.add(`${hr * stride + i},${hc * stride + j}`);
+          }
+ 
+          let html = '<div style="display:inline-block">';
+          for (let r = 0; r < rows; r++) {
+            html += '<div style="display:flex;gap:2px;margin-bottom:2px;">';
+            for (let c = 0; c < cols; c++) {
+              const v = mat[r][c];
+              const bg = poolCellColor(v, mn, mx);
+              const fg = poolFg(v, mn, mx);
+              const isHL = hlSet.has(`${r},${c}`);
+              const outline = isHL ? 'outline:2.5px solid var(--purple);outline-offset:-1px;' : '';
+              html += `<div style="width:${sz}px;height:${sz}px;background:${bg};color:${fg};display:flex;align-items:center;justify-content:center;font-family:monospace;font-size:${sz < 36 ? 11 : 13}px;font-weight:500;border-radius:4px;border:1px solid var(--border);${outline}">${v}</div>`;
+            }
+            html += '</div>';
+          }
+          html += '</div>';
+          return html;
+        }
+ 
+        function outputGridHTML(mat, activeR, activeC, cellSize) {
+          const sz = cellSize || 44;
+          const rows = mat.length, cols = mat[0].length;
+          const flat = mat.flat();
+          const mn = Math.min(...flat), mx = Math.max(...flat);
+          let html = '<div style="display:inline-block">';
+          for (let r = 0; r < rows; r++) {
+            html += '<div style="display:flex;gap:2px;margin-bottom:2px;">';
+            for (let c = 0; c < cols; c++) {
+              const v = mat[r][c];
+              const bg = poolCellColor(v, mn, mx);
+              const fg = poolFg(v, mn, mx);
+              const isActive = r === activeR && c === activeC;
+              const outline = isActive ? 'outline:2.5px solid var(--coral);outline-offset:-1px;' : '';
+              html += `<div style="width:${sz}px;height:${sz}px;background:${bg};color:${fg};display:flex;align-items:center;justify-content:center;font-family:monospace;font-size:13px;font-weight:500;border-radius:4px;border:1px solid var(--border);${outline}">${v}</div>`;
+            }
+            html += '</div>';
+          }
+          html += '</div>';
+          return html;
+        }
+ 
+        function patchHTML(patch, poolSize, mode) {
+          const chosen = mode === 'max' ? Math.max(...patch) : Math.round(patch.reduce((a,b)=>a+b,0)/patch.length);
+          const mn = Math.min(...patch), mx = Math.max(...patch);
+          let html = '<div style="display:inline-block">';
+          for (let i = 0; i < poolSize; i++) {
+            html += '<div style="display:flex;gap:2px;margin-bottom:2px;">';
+            for (let j = 0; j < poolSize; j++) {
+              const v = patch[i * poolSize + j];
+              const bg = poolCellColor(v, mn, mx);
+              const fg = poolFg(v, mn, mx);
+              const isSel = v === chosen && mode === 'max';
+              const outline = isSel ? 'outline:2.5px solid var(--coral);outline-offset:-1px;' : '';
+              html += `<div style="width:44px;height:44px;background:${bg};color:${fg};display:flex;align-items:center;justify-content:center;font-family:monospace;font-size:14px;font-weight:500;border-radius:4px;border:1px solid var(--border);${outline}">${v}</div>`;
+            }
+            html += '</div>';
+          }
+          html += '</div>';
+          return html;
+        }
+ 
+        let poolTab = 0;
+        let selectedCell = [0, 0];
+ 
+        const POOLTABS = [
+          {
+            label: '1단계 — MaxPooling',
+            render() {
+              const { out, windows } = applyPool(POOL_INPUT, 2, 2, 'max');
+              const [sr, sc] = selectedCell;
+              const patch = windows[sr][sc];
+              const maxVal = Math.max(...patch);
+ 
+              document.getElementById('pool-visual').innerHTML = `
+                <div style="display:flex;gap:20px;align-items:flex-start;flex-wrap:wrap;margin-bottom:14px;">
+                  <div class="fv-col">
+                    <div class="fv-label">입력 Feature Map (6×6)</div>
+                    <div style="margin-top:4px">${gridHTML(POOL_INPUT, selectedCell, 2, 2, 34)}</div>
+                    <div style="font-size:11px;color:var(--text2);margin-top:4px;">보라 테두리 = 선택된 2×2 윈도우</div>
+                  </div>
+                  <div class="fv-op" style="padding-top:28px;">→</div>
+                  <div class="fv-col">
+                    <div class="fv-label">출력 (3×3) — 클릭해서 확인</div>
+                    <div style="margin-top:4px" id="pool-output-grid">${outputGridHTML(out, sr, sc, 44)}</div>
+                    <div style="font-size:11px;color:var(--text2);margin-top:4px;">주황 테두리 = 선택된 출력 셀</div>
+                  </div>
+                </div>
+                <div style="border-top:1px solid var(--border);padding-top:12px;">
+                  <div style="font-size:12px;color:var(--text2);margin-bottom:8px;font-weight:500;">선택된 윈도우 (${sr},${sc}) 계산 과정</div>
+                  <div style="display:flex;gap:16px;align-items:center;flex-wrap:wrap;">
+                    <div class="fv-col">
+                      <div class="fv-label">2×2 윈도우 값</div>
+                      <div style="margin-top:4px">${patchHTML(patch, 2, 'max')}</div>
+                    </div>
+                    <div class="fv-op">→</div>
+                    <div class="fv-col">
+                      <div class="fv-label">Max 선택</div>
+                      <div style="width:60px;height:60px;background:${poolCellColor(maxVal, Math.min(...POOL_INPUT.flat()), Math.max(...POOL_INPUT.flat()))};color:${poolFg(maxVal,0,30)};display:flex;align-items:center;justify-content:center;font-family:monospace;font-size:22px;font-weight:700;border-radius:8px;border:2px solid var(--coral);margin-top:4px">${maxVal}</div>
+                    </div>
+                  </div>
+                </div>`;
+ 
+              // attach click handlers to output grid cells
+              requestAnimationFrame(() => {
+                const grid = document.getElementById('pool-output-grid');
+                if (!grid) return;
+                const cells = grid.querySelectorAll('div > div > div');
+                cells.forEach((cell, idx) => {
+                  const r = Math.floor(idx / out[0].length);
+                  const c = idx % out[0].length;
+                  cell.style.cursor = 'pointer';
+                  cell.onclick = () => { selectedCell = [r, c]; POOLTABS[poolTab].render(); };
+                });
+              });
+ 
+              renderStats('pool-stats', [
+                { label: '입력 크기', val: '6×6' },
+                { label: '출력 크기', val: '3×3' },
+                { label: `윈도우(${sr},${sc}) 최댓값`, val: maxVal }
+              ]);
+              document.getElementById('pool-formula').innerHTML = `<div class="formula">MaxPool(2×2, stride=2)<br><br>출력 크기 = ⌊(6 − 2) / 2⌋ + 1 = <span class="hl-p">3</span><br><br>윈도우 [${patch.join(', ')}] → max = <span class="hl-c">${maxVal}</span></div>`;
+              document.getElementById('pool-explain').textContent = 'MaxPooling은 각 윈도우에서 가장 큰 값만 남깁니다. 출력 셀을 클릭하면 해당 윈도우가 입력에서 어디인지, 어떤 값이 선택됐는지 확인할 수 있습니다. 강한 특징(엣지, 패턴)의 존재 여부를 유지하면서 크기를 절반으로 줄입니다.';
+            }
+          },
+          {
+            label: '2단계 — AveragePooling',
+            render() {
+              const { out, windows } = applyPool(POOL_INPUT, 2, 2, 'avg');
+              const [sr, sc] = selectedCell;
+              const patch = windows[sr][sc];
+              const avgVal = Math.round(patch.reduce((a,b)=>a+b,0)/patch.length);
+ 
+              document.getElementById('pool-visual').innerHTML = `
+                <div style="display:flex;gap:20px;align-items:flex-start;flex-wrap:wrap;margin-bottom:14px;">
+                  <div class="fv-col">
+                    <div class="fv-label">입력 Feature Map (6×6)</div>
+                    <div style="margin-top:4px">${gridHTML(POOL_INPUT, selectedCell, 2, 2, 34)}</div>
+                    <div style="font-size:11px;color:var(--text2);margin-top:4px;">보라 테두리 = 선택된 2×2 윈도우</div>
+                  </div>
+                  <div class="fv-op" style="padding-top:28px;">→</div>
+                  <div class="fv-col">
+                    <div class="fv-label">출력 (3×3) — 클릭해서 확인</div>
+                    <div style="margin-top:4px" id="pool-output-grid">${outputGridHTML(out, sr, sc, 44)}</div>
+                    <div style="font-size:11px;color:var(--text2);margin-top:4px;">주황 테두리 = 선택된 출력 셀</div>
+                  </div>
+                </div>
+                <div style="border-top:1px solid var(--border);padding-top:12px;">
+                  <div style="font-size:12px;color:var(--text2);margin-bottom:8px;font-weight:500;">선택된 윈도우 (${sr},${sc}) 계산 과정</div>
+                  <div style="display:flex;gap:16px;align-items:center;flex-wrap:wrap;">
+                    <div class="fv-col">
+                      <div class="fv-label">2×2 윈도우 값</div>
+                      <div style="margin-top:4px">${patchHTML(patch, 2, 'avg')}</div>
+                    </div>
+                    <div class="fv-op">→</div>
+                    <div class="fv-col">
+                      <div class="fv-label">Average</div>
+                      <div style="width:60px;height:60px;background:${poolCellColor(avgVal, Math.min(...POOL_INPUT.flat()), Math.max(...POOL_INPUT.flat()))};color:${poolFg(avgVal,0,30)};display:flex;align-items:center;justify-content:center;font-family:monospace;font-size:22px;font-weight:700;border-radius:8px;border:2px solid var(--teal);margin-top:4px">${avgVal}</div>
+                    </div>
+                    <div style="font-size:12px;color:var(--text2);font-family:monospace;line-height:1.9">
+                      (${patch.join(' + ')})<br>÷ ${patch.length}<br>= <span class="hl-t">${avgVal}</span>
+                    </div>
+                  </div>
+                </div>`;
+ 
+              requestAnimationFrame(() => {
+                const grid = document.getElementById('pool-output-grid');
+                if (!grid) return;
+                const cells = grid.querySelectorAll('div > div > div');
+                cells.forEach((cell, idx) => {
+                  const r = Math.floor(idx / out[0].length);
+                  const c = idx % out[0].length;
+                  cell.style.cursor = 'pointer';
+                  cell.onclick = () => { selectedCell = [r, c]; POOLTABS[poolTab].render(); };
+                });
+              });
+ 
+              renderStats('pool-stats', [
+                { label: '입력 크기', val: '6×6' },
+                { label: '출력 크기', val: '3×3' },
+                { label: `윈도우(${sr},${sc}) 평균값`, val: avgVal }
+              ]);
+              document.getElementById('pool-formula').innerHTML = `<div class="formula">AvgPool(2×2, stride=2)<br><br>출력 크기 = ⌊(6 − 2) / 2⌋ + 1 = <span class="hl-p">3</span><br><br>윈도우 [${patch.join(', ')}] → avg = (${patch.join('+')})/4 = <span class="hl-t">${avgVal}</span></div>`;
+              document.getElementById('pool-explain').textContent = 'AveragePooling은 각 윈도우의 평균값을 출력합니다. 출력 셀을 클릭하면 해당 윈도우를 확인할 수 있습니다. MaxPooling과 달리 모든 값을 고르게 반영하며, 특정 특징의 강도보다는 전반적인 분포를 요약합니다.';
+            }
+          },
+          {
+            label: '3단계 — Max vs Avg 비교',
+            render() {
+              const { out: maxOut } = applyPool(POOL_INPUT, 2, 2, 'max');
+              const { out: avgOut } = applyPool(POOL_INPUT, 2, 2, 'avg');
+ 
+              document.getElementById('pool-visual').innerHTML = `
+                <div style="display:flex;gap:20px;align-items:flex-start;flex-wrap:wrap;margin-bottom:14px;">
+                  <div class="fv-col">
+                    <div class="fv-label">입력 (6×6)</div>
+                    <div style="margin-top:4px">${gridHTML(POOL_INPUT, null, 2, 2, 30)}</div>
+                  </div>
+                  <div class="fv-op" style="padding-top:24px;">→</div>
+                  <div class="fv-col">
+                    <div class="fv-label" style="color:var(--purple)">MaxPooling 출력 (3×3)</div>
+                    <div style="margin-top:4px">${outputGridHTML(maxOut, -1, -1, 44)}</div>
+                  </div>
+                  <div class="fv-col">
+                    <div class="fv-label" style="color:var(--teal)">AveragePooling 출력 (3×3)</div>
+                    <div style="margin-top:4px">${outputGridHTML(avgOut, -1, -1, 44)}</div>
+                  </div>
+                </div>
+                <div style="border-top:1px solid var(--border);padding-top:12px;">
+                  <div style="font-size:12px;color:var(--text2);margin-bottom:8px;font-weight:500;">셀별 차이 (Max − Avg)</div>
+                  <div style="display:flex;gap:2px;flex-wrap:wrap;">
+                    ${maxOut.flat().map((v, i) => {
+                      const diff = v - avgOut.flat()[i];
+                      const bg = diff > 5 ? 'var(--purple-bg)' : 'var(--bg2)';
+                      const col = diff > 5 ? 'var(--purple-text)' : 'var(--text2)';
+                      return `<div style="width:44px;height:44px;background:${bg};color:${col};display:flex;align-items:center;justify-content:center;font-family:monospace;font-size:12px;font-weight:500;border-radius:4px;border:1px solid var(--border)">+${diff}</div>`;
+                    }).join('')}
+                  </div>
+                  <div style="font-size:11px;color:var(--text2);margin-top:6px;">보라 셀 = Max가 Avg보다 5 이상 큰 위치 (강한 특징이 존재)</div>
+                </div>`;
+ 
+              const maxFlat = maxOut.flat(), avgFlat = avgOut.flat();
+              const avgDiff = (maxFlat.reduce((a,b,i) => a + (b - avgFlat[i]), 0) / maxFlat.length).toFixed(1);
+              renderStats('pool-stats', [
+                { label: 'Max 출력 평균', val: (maxFlat.reduce((a,b)=>a+b,0)/maxFlat.length).toFixed(1) },
+                { label: 'Avg 출력 평균', val: (avgFlat.reduce((a,b)=>a+b,0)/avgFlat.length).toFixed(1) },
+                { label: '평균 차이 (Max−Avg)', val: avgDiff }
+              ]);
+              document.getElementById('pool-formula').innerHTML = `<div class="formula"><span class="hl-p">MaxPooling</span>: 강한 특징(엣지, 패턴)의 존재 여부 보존<br>→ 값이 크게 튀는 위치를 살림<br><br><span class="hl-t">AveragePooling</span>: 영역 전체의 고른 요약<br>→ 부드럽게 평탄화, Global Avg Pooling에 주로 사용</div>`;
+              document.getElementById('pool-explain').textContent = 'MaxPooling은 각 영역에서 가장 강한 신호만 남기므로, 물체가 조금 이동해도 동일한 값을 출력하는 위치 불변성(Translation Invariance)이 생깁니다. AveragePooling은 공간 정보를 더 고르게 보존하며, ResNet 등 최신 네트워크의 마지막 Global Average Pooling으로 자주 쓰입니다.';
+            }
+          },
+          {
+            label: '4단계 — 윈도우 크기 실험',
+            render() {
+              const poolSel = document.getElementById('pool-size-sel');
+              const strideSel = document.getElementById('pool-stride-sel');
+              const modeSel = document.getElementById('pool-mode-sel');
+              const ps = poolSel ? parseInt(poolSel.value) : 2;
+              const st = strideSel ? parseInt(strideSel.value) : 2;
+              const mode = modeSel ? modeSel.value : 'max';
+ 
+              const outH = Math.floor((6 - ps) / st) + 1;
+              const outW = Math.floor((6 - ps) / st) + 1;
+              const valid = outH > 0 && outW > 0;
+ 
+              let outHTML = '', formulaNote = '';
+              if (valid) {
+                const { out } = applyPool(POOL_INPUT, ps, st, mode);
+                outHTML = outputGridHTML(out, -1, -1, 44);
+                formulaNote = `출력 크기 = ⌊(6 − ${ps}) / ${st}⌋ + 1 = <span class="hl-p">${outH}</span>`;
+              } else {
+                outHTML = `<div style="padding:16px;color:var(--coral);font-size:13px;">❌ 유효하지 않은 조합<br>윈도우가 입력보다 큽니다</div>`;
+                formulaNote = `⌊(6 − ${ps}) / ${st}⌋ + 1 = <span class="hl-c">유효하지 않음</span>`;
+              }
+ 
+              document.getElementById('pool-visual').innerHTML = `
+                <div style="display:flex;gap:12px;margin-bottom:14px;flex-wrap:wrap;align-items:center;">
+                  <div>
+                    <div style="font-size:11px;color:var(--text2);margin-bottom:4px;">Pool 크기</div>
+                    <select id="pool-size-sel" style="padding:5px 8px;border-radius:6px;border:1px solid var(--border);background:var(--bg);color:var(--text);font-size:13px;">
+                      <option value="2" ${ps===2?'selected':''}>2×2</option>
+                      <option value="3" ${ps===3?'selected':''}>3×3</option>
+                      <option value="4" ${ps===4?'selected':''}>4×4</option>
+                    </select>
+                  </div>
+                  <div>
+                    <div style="font-size:11px;color:var(--text2);margin-bottom:4px;">Stride</div>
+                    <select id="pool-stride-sel" style="padding:5px 8px;border-radius:6px;border:1px solid var(--border);background:var(--bg);color:var(--text);font-size:13px;">
+                      <option value="1" ${st===1?'selected':''}>1</option>
+                      <option value="2" ${st===2?'selected':''}>2</option>
+                      <option value="3" ${st===3?'selected':''}>3</option>
+                    </select>
+                  </div>
+                  <div>
+                    <div style="font-size:11px;color:var(--text2);margin-bottom:4px;">방식</div>
+                    <select id="pool-mode-sel" style="padding:5px 8px;border-radius:6px;border:1px solid var(--border);background:var(--bg);color:var(--text);font-size:13px;">
+                      <option value="max" ${mode==='max'?'selected':''}>MaxPooling</option>
+                      <option value="avg" ${mode==='avg'?'selected':''}>AveragePooling</option>
+                    </select>
+                  </div>
+                </div>
+                <div style="display:flex;gap:20px;align-items:flex-start;flex-wrap:wrap;">
+                  <div class="fv-col">
+                    <div class="fv-label">입력 (6×6)</div>
+                    <div style="margin-top:4px">${gridHTML(POOL_INPUT, null, ps, st, 30)}</div>
+                  </div>
+                  <div class="fv-op" style="padding-top:24px;">→</div>
+                  <div class="fv-col">
+                    <div class="fv-label">출력 (${valid ? outH+'×'+outW : '?'})</div>
+                    <div style="margin-top:4px">${outHTML}</div>
+                  </div>
+                </div>`;
+ 
+              requestAnimationFrame(() => {
+                ['pool-size-sel','pool-stride-sel','pool-mode-sel'].forEach(id => {
+                  const el = document.getElementById(id);
+                  if (el) el.onchange = () => POOLTABS[3].render();
+                });
+              });
+ 
+              renderStats('pool-stats', [
+                { label: '입력 크기', val: '6×6' },
+                { label: '출력 크기', val: valid ? outH+'×'+outW : '❌ 불가' },
+                { label: '파라미터 수', val: '0 (학습 없음)' }
+              ]);
+              document.getElementById('pool-formula').innerHTML = `<div class="formula">${formulaNote}<br><br>Pooling은 학습 파라미터가 없습니다 — 고정 연산</div>`;
+              document.getElementById('pool-explain').textContent = `Pool 크기와 Stride를 바꿔가며 출력 크기 변화를 확인하세요. Pooling은 Convolution과 달리 학습되는 가중치가 전혀 없는 고정 연산입니다. 크기를 줄이면서 계산량과 파라미터를 동시에 줄여줍니다.`;
+            }
+          }
+        ];
+ 
+        const poolTabRow = document.getElementById('pool-tabs');
+        POOLTABS.forEach((t, i) => {
+          const b = document.createElement('button');
+          b.className = 'tab-btn' + (i === 0 ? ' active' : '');
+          b.textContent = t.label;
+          b.onclick = () => {
+            poolTab = i;
+            poolTabRow.querySelectorAll('.tab-btn').forEach((bb, j) => bb.classList.toggle('active', j === i));
+            POOLTABS[i].render();
+          };
+          poolTabRow.appendChild(b);
+        });
+ 
+        POOLTABS[0].render();
+      }
+ 
     }); // DOMContentLoaded
   </script>
 </body>
 </html>
+ 
